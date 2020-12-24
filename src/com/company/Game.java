@@ -24,6 +24,10 @@ public class Game {
             }
         });
 
+        displayStartView();
+    }
+
+    private void displayStartView() {
         frame.setVisible(true);
     }
 }
