@@ -17,6 +17,10 @@ public class Game {
         initScreen();
     }
 
+    public JFrame getFrame() {
+        return frame;
+    }
+
     private void initScreen() {
         frame = new JFrame("Arkanoid");
         frame.setSize(600, 500);

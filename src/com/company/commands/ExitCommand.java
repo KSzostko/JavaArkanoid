@@ -2,6 +2,8 @@ package com.company.commands;
 
 import com.company.Game;
 
+import javax.swing.*;
+
 public class ExitCommand extends Command {
     public ExitCommand(Game game) {
         super(game);
@@ -9,6 +11,9 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute() {
-        System.out.println("Exit command executed");
+        JFrame frame = game.getFrame();
+        System.exit(0);
+        frame.dispose();
+        frame.setVisible(false);
     }
 }
