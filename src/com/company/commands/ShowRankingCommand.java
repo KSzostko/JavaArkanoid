@@ -9,6 +9,6 @@ public class ShowRankingCommand extends Command {
 
     @Override
     public void execute() {
-        System.out.println("Show ranking command executed");
+        game.showRanking();
     }
 }

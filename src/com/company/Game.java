@@ -11,9 +11,11 @@ import java.awt.event.WindowEvent;
 
 public class Game {
     private JFrame frame;
+    private Ranking ranking;
 
     public Game() {
         // @TODO: add positionStrategy field
+        ranking = new Ranking();
         initScreen();
     }
 
@@ -59,8 +61,7 @@ public class Game {
         clearScreen();
         frame.setLayout(new FlowLayout());
 
-        // html tags are just needed for breaking lines
-        String text = "<html>This is an university project, which idea was to get accustomed to implementing design patterns.</html>";
+        String text = "This is an university project, which idea was to get accustomed to implementing design patterns.";
         JLabel infoLabel = new JLabel(text, JLabel.CENTER);
         infoLabel.setSize(new Dimension(600, 400));
 
@@ -75,6 +76,31 @@ public class Game {
 
         frame.add(infoLabel);
         frame.add(button);
+
+        frame.setVisible(true);
+    }
+
+    public void showRanking() {
+        clearScreen();
+        frame.setLayout(new BorderLayout(20, 60));
+
+        JLabel leadersLabel = new JLabel("Leaderboard", JLabel.CENTER);
+
+        JPanel controlPanel = new JPanel();
+        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
+        controlPanel.setBackground(Color.WHITE);
+
+        frame.add(leadersLabel, BorderLayout.PAGE_START);
+
+        RankingAdapter adapter = new RankingAdapter();
+        adapter.setTableData(ranking);
+        JTable table = new JTable(adapter);
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        frame.add(scrollPane, BorderLayout.CENTER);
+        frame.add(controlPanel, BorderLayout.PAGE_END);
+
+        addNavButtons(controlPanel, false);
 
         frame.setVisible(true);
     }
@@ -102,8 +128,8 @@ public class Game {
         JButton exitButton = new JButton("Exit");
         exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton goBackButton = new JButton("goBack");
-        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JButton goBackButton = new JButton("Go Back");
+        goBackButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         startButton.addActionListener(new ActionListener() {
             @Override
@@ -148,10 +174,9 @@ public class Game {
         panel.add(startButton);
         panel.add(Box.createVerticalStrut(20));
 
-        panel.add(authorsButton);
-        panel.add(Box.createVerticalStrut(20));
-
         if(isStart) {
+            panel.add(authorsButton);
+            panel.add(Box.createVerticalStrut(20));
             panel.add(rankingButton);
         } else {
             panel.add(goBackButton);
