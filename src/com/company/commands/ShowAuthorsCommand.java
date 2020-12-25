@@ -9,6 +9,6 @@ public class ShowAuthorsCommand extends Command {
 
     @Override
     public void execute() {
-        System.out.println("Show authors command executed");
+        game.displayAuthorsView();
     }
 }

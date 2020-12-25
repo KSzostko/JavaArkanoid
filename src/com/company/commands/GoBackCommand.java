@@ -9,6 +9,6 @@ public class GoBackCommand extends Command {
 
     @Override
     public void execute() {
-        System.out.println("Go back command executed");
+        game.displayStartView();
     }
 }

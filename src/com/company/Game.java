@@ -36,7 +36,7 @@ public class Game {
         displayStartView();
     }
 
-    private void displayStartView() {
+    public void displayStartView() {
         clearScreen();
         frame.setLayout(new BorderLayout(20, 60));
 
@@ -55,6 +55,30 @@ public class Game {
         frame.setVisible(true);
     }
 
+    public void displayAuthorsView() {
+        clearScreen();
+        frame.setLayout(new FlowLayout());
+
+        // html tags are just needed for breaking lines
+        String text = "<html>This is an university project, which idea was to get accustomed to implementing design patterns.</html>";
+        JLabel infoLabel = new JLabel(text, JLabel.CENTER);
+        infoLabel.setSize(new Dimension(600, 400));
+
+        JButton button = new JButton("Go Back");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Command command = new GoBackCommand(Game.this);
+                executeCommand(command);
+            }
+        });
+
+        frame.add(infoLabel);
+        frame.add(button);
+
+        frame.setVisible(true);
+    }
+
     private void executeCommand(Command command) {
         command.execute();
     }
@@ -62,6 +86,7 @@ public class Game {
     private void clearScreen() {
         frame.getContentPane().removeAll();
         frame.validate();
+        frame.repaint();
     }
 
     private void addNavButtons(JPanel panel, boolean isStart) {
