@@ -50,4 +50,9 @@ public class Game {
     private void executeCommand(Command command) {
         command.execute();
     }
+
+    private void clearScreen() {
+        frame.getContentPane().removeAll();
+        frame.validate();
+    }
 }
