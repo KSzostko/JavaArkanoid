@@ -15,6 +15,14 @@ public class Ranking {
         return scores;
     }
 
+    public int getSize() {
+        return scores.size();
+    }
+
+    public Score getScore(int index) {
+        return scores.get(index);
+    }
+
     public void addScore(Score score) {
         scores.add(score);
         // update ranking file
