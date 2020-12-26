@@ -9,6 +9,6 @@ public class StartLevelCommand extends Command {
 
     @Override
     public void execute() {
-        System.out.println("Start level command executed");
+        game.startLevel();
     }
 }

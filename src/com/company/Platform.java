@@ -1,8 +1,9 @@
 package com.company;
 
+import javax.swing.*;
 import java.awt.*;
 
-public class Platform {
+public class Platform extends JComponent {
     private int width;
     private int height;
     private int x;
@@ -21,9 +22,9 @@ public class Platform {
     public Platform() {
         width = 40;
         height = 20;
-        x = 300;
-        y = 500;
-        levelWidth = 600;
+        x = 50;
+        y = 50;
+        levelWidth = 500;
     }
 
     public void setImage(Image image) {
@@ -39,5 +40,12 @@ public class Platform {
         } else {
             if(x + 5 <= levelWidth) x += 5;
         }
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        g.setColor(Color.RED);
+        g.fillRect(x, y, width, height);
+        g.drawRect (x, y, width, height);
     }
 }
