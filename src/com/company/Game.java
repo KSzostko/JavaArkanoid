@@ -103,7 +103,14 @@ public class Game {
     }
 
     public void startLevel() {
+        clearScreen();
 
+        // this is for platform movement test only
+        Level level = new Level(new Platform());
+        frame.getContentPane().add(level);
+
+        level.requestFocusInWindow();
+        frame.setVisible(true);
     }
 
     private void executeCommand(Command command) {

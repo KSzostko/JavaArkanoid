@@ -1,15 +1,15 @@
 package com.company;
 
-import javax.swing.*;
 import java.awt.*;
 
-public class Platform extends JComponent {
+public class Platform {
     private int width;
     private int height;
     private int x;
     private int y;
     private int levelWidth;
     private Image image;
+    private int moving;
 
     public Platform(int width, int height, int x, int y, int levelWidth) {
         this.width = width;
@@ -17,6 +17,7 @@ public class Platform extends JComponent {
         this.x = x;
         this.y = y;
         this.levelWidth = levelWidth;
+        moving = 0;
     }
 
     public Platform() {
@@ -24,26 +25,37 @@ public class Platform extends JComponent {
         height = 20;
         x = 50;
         y = 50;
-        levelWidth = 500;
+        levelWidth = 585;
+        moving = 0;
     }
 
     public void setImage(Image image) {
         this.image = image;
     }
 
+    public void moveLeft() {
+        moving = -5;
+    }
 
-    // @TODO: adjust right step
-    public void move(boolean left) {
-        if(left) {
-            if(x - 5 >= 0) x -= 5;
-            // @TODO: drawing platform
-        } else {
-            if(x + 5 <= levelWidth) x += 5;
+    public void moveRight() {
+        moving = 5;
+    }
+
+    public void stop() {
+        moving = 0;
+    }
+
+    public void tick() {
+        if(moving < 0) {
+            if(x + moving >= 0) x += moving;
+        } else if (moving > 0) {
+            System.out.println(x + width + moving);
+            if(x + width + moving <= levelWidth) x += moving;
         }
     }
 
-    @Override
-    public void paint(Graphics g) {
+    // @TODO: add platform image
+    public void draw(Graphics g) {
         g.setColor(Color.RED);
         g.fillRect(x, y, width, height);
         g.drawRect (x, y, width, height);
