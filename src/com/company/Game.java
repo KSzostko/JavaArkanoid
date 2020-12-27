@@ -9,10 +9,13 @@ import java.awt.event.*;
 public class Game {
     private JFrame frame;
     private Ranking ranking;
+    //
+    private LevelFileReader levelFileReader;
 
     public Game() {
         // @TODO: add positionStrategy field
         ranking = new Ranking();
+        levelFileReader = LevelFileReader.getInstance();
         initScreen();
     }
 
