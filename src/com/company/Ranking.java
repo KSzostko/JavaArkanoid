@@ -1,5 +1,8 @@
 package com.company;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,23 +11,43 @@ public class Ranking {
 
     public Ranking() {
         scores = new ArrayList<>();
-        // load current ranking from file
+        loadRanking();
+    }
 
-        // test data, will be removed later
-        scores.add(new Score("Anon", 123));
-        scores.add(new Score("Anon1", 2123));
-        scores.add(new Score("Anon2", 3123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
+    private void loadRanking() {
+        BufferedReader br = null;
+
+        try {
+            br = new BufferedReader(new FileReader("ranking/ranking.txt"));
+
+            String fileLine, username = "";
+            int points = -1, lineCount = 0;
+
+            while((fileLine = br.readLine()) != null) {
+                if(lineCount % 2 == 0) {
+                    if(lineCount != 0) {
+                        if(points == -1) {
+                            throw new Error("Something is wrong with the data order!");
+                        }
+
+                        Score score = new Score(username, points);
+                        scores.add(score);
+                    }
+
+                    username = fileLine;
+                } else {
+                    points = Integer.parseInt(fileLine);
+                }
+                lineCount++;
+            }
+
+            Score score = new Score(username, points);
+            scores.add(score);
+            br.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Score> getScores() {

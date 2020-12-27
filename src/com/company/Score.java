@@ -16,4 +16,9 @@ public class Score {
     public int getPoints() {
         return points;
     }
+
+    @Override
+    public String toString() {
+        return "User " + username + " scored " + points + " points";
+    }
 }
