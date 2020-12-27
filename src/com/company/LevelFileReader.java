@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class LevelFileReader
 {
@@ -17,15 +18,11 @@ public class LevelFileReader
     }
 
     // @TODO: funkcja do czytania plikow
-    // nie dałem tego bo nie ustalone jak ma plik wyglądać
-    // poza tym w Map nie można trzymać intów itp
-    /*
-    public HashMap<char,int> readFile(String Path)
+    public Map<Character,Integer> readFile(String Path)
     {
-
+        Map<Character, Integer> blocksCount = new HashMap<>();
         return null;
     }
-    */
 
     private LevelFileReader()
     {
