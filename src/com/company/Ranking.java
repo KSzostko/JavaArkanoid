@@ -1,9 +1,9 @@
 package com.company;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Ranking {
@@ -50,6 +50,27 @@ public class Ranking {
         }
     }
 
+    private boolean updateFile() {
+        BufferedWriter writer = null;
+
+        try {
+            writer = new BufferedWriter(new FileWriter("ranking/ranking.txt"));
+
+            for(Score score : scores) {
+                writer.append(score.getUsername());
+                writer.append("\n");
+                writer.append(Integer.toString(score.getPoints()));
+                writer.append("\n");
+            }
+            writer.close();
+
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public List<Score> getScores() {
         return scores;
     }
@@ -62,9 +83,17 @@ public class Ranking {
         return scores.get(index);
     }
 
-    // @TODO: Sort scores after adding new one
     public void addScore(Score score) {
         scores.add(score);
-        // update ranking file
+        Collections.sort(scores, new Comparator<Score>() {
+            @Override
+            public int compare(Score o1, Score o2) {
+                return Integer.compare(o2.getPoints(), o1.getPoints());
+            }
+        });
+
+        if(!updateFile()) {
+            throw new Error("File couldn't be updated!");
+        }
     }
 }
