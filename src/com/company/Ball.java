@@ -1,26 +1,28 @@
 package com.company;
 
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
 
 public class Ball {
     private int radius;
     private int x;
     private int y;
-    private int speed;
+    private int speedX;
+    private int speedY;
 
-    public Ball(int radius, int x, int y, int speed) {
+    public Ball(int radius, int x, int y, int speedX, int speedY) {
         this.radius = radius;
         this.x = x;
         this.y = y;
-        this.speed = speed;
+        this.speedX = speedX;
+        this.speedY = speedY;
     }
 
     public Ball() {
         radius = 20;
-        x = 300;
+        x = 80;
         y = 300;
-        speed = 3;
+        speedX = -3;
+        speedY = -3;
     }
 
     public void draw(Graphics g) {
@@ -30,7 +32,30 @@ public class Ball {
     }
 
     public void move() {
-        x += speed;
-        y += speed;
+        // @TODO: ball should have levelWidth and platform coords
+        // hardcoded value will be removed
+        // this is for testing ball movement
+        if(x >= 585 - radius) {
+            speedX *= -1;
+        }
+
+        if(x <= 0) {
+            speedX *= -1;
+        }
+
+        x += speedX;
+
+        if(y <= 0) {
+            speedY *= -1;
+        }
+        // condition if ball is below platform level
+        // then it's game over
+        y += speedY;
+    }
+
+    //  check if there was collision with the block or platform
+    // if there was, multiply by -1
+    public void collide() {
+
     }
 }

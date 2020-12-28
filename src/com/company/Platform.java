@@ -56,11 +56,7 @@ public class Platform {
         }
     }
 
-    // @TODO: add platform image
     public void draw(Graphics g) {
         g.drawImage(image, x, y, width, height, null);
-//        g.setColor(Color.RED);
-//        g.fillRect(x, y, width, height);
-//        g.drawRect (x, y, width, height);
     }
 }
