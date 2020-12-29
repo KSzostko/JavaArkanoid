@@ -9,10 +9,15 @@ public class BallSizeDecreaseDecorator extends BallDecorator {
     }
 
     @Override
+    public int getLevelEnd() {
+        return ball.getLevelEnd() * 2;
+    }
+
+    @Override
     public void draw(Graphics2D g) {
         AffineTransform savedAt = g.getTransform();
-        super.draw(changeCoordinateSystem(g));
-        //g.setTransform(savedAt);
+        ball.draw(changeCoordinateSystem(g));
+        g.transform(savedAt);
     }
 
     // not finished
@@ -20,7 +25,8 @@ public class BallSizeDecreaseDecorator extends BallDecorator {
     private Graphics2D changeCoordinateSystem(Graphics2D g) {
         AffineTransform tr = new AffineTransform();
 
-        tr.scale(0.5, 0.5);
+        g.scale(0.5, 0.5);
+        //tr.scale(0.5, 0.5);
         //tr.translate(585, 0);
         g.transform(tr);
 

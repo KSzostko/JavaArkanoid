@@ -1,8 +1,9 @@
 package com.company;
 
+import javax.swing.*;
 import java.awt.*;
 
-public class Ball {
+public class Ball extends JComponent {
     private int radius;
     private int x;
     private int y;
@@ -35,22 +36,40 @@ public class Ball {
         // @TODO: ball should have levelWidth and platform coords
         // hardcoded value will be removed
         // this is for testing ball movement
-        if(x >= 585 - radius) {
-            speedX *= -1;
+        speedX = adjustSpeedXVector();
+        x += speedX;
+
+        speedY = adjustSpeedYVector();
+        y += speedY;
+    }
+    public int adjustSpeedXVector() {
+        if(x >= getLevelEnd()) {
+            return -speedX;
         }
 
         if(x <= 0) {
-            speedX *= -1;
+            return -speedX;
         }
 
-        x += speedX;
+        return speedX;
+    }
 
+
+    public int adjustSpeedYVector() {
         if(y <= 0) {
-            speedY *= -1;
+            return -speedY;
         }
         // condition if ball is below platform level
         // then it's game over
-        y += speedY;
+        // or if ball hit platform or block there need to be update here
+
+        return speedY;
+    }
+
+    // hardcoded value for now
+    // later will be updated
+    public int getLevelEnd() {
+        return 585 - radius;
     }
 
     //  check if there was collision with the block or platform

@@ -53,5 +53,6 @@ public class Level extends JPanel {
 
         platform.draw(g2d);
         ball.draw(g2d);
+        System.out.println(ball.getLocation());
     }
 }
