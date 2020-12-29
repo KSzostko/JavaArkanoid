@@ -3,7 +3,7 @@ package com.company;
 import javax.swing.*;
 import java.awt.*;
 
-public class Ball extends JComponent {
+public class Ball {
     private int radius;
     private int x;
     private int y;
@@ -24,6 +24,30 @@ public class Ball extends JComponent {
         y = 300;
         speedX = -3;
         speedY = -3;
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+
+    public void setRadius(int radius) {
+        this.radius = radius;
+    }
+
+    public int getSpeedX() {
+        return speedX;
+    }
+
+    public void setSpeedX(int speedX) {
+        this.speedX = speedX;
+    }
+
+    public int getSpeedY() {
+        return speedY;
+    }
+
+    public void setSpeedY(int speedY) {
+        this.speedY = speedY;
     }
 
     public void draw(Graphics2D g) {
