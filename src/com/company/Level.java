@@ -7,9 +7,11 @@ import java.awt.event.KeyEvent;
 
 public class Level extends JPanel {
     private Platform platform;
+    private Ball ball;
 
-    public Level(Platform platform) {
+    public Level(Platform platform, Ball ball) {
         this.platform = platform;
+        this.ball = ball;
 
         initLevel();
     }
@@ -41,13 +43,15 @@ public class Level extends JPanel {
             }
         });
 
-        new Thread(new LevelController(this, platform)).start();
+        new Thread(new LevelController(this, platform, ball)).start();
     }
 
     @Override
     public void paint(Graphics g) {
-        super.paint(g);
+        Graphics2D g2d = (Graphics2D)g.create();
+        super.paint(g2d);
 
-        platform.draw(g);
+        platform.draw(g2d);
+        ball.draw(g2d);
     }
 }

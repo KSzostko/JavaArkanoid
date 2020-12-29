@@ -9,24 +9,27 @@ public class Platform {
     private int y;
     private int levelWidth;
     private Image image;
-    private int moving;
+    private int moving = 0;
+    private final int sensitivity;
 
-    public Platform(int width, int height, int x, int y, int levelWidth) {
+    public Platform(int width, int height, int x, int y, int levelWidth, int sensitivity, String file) {
         this.width = width;
         this.height = height;
         this.x = x;
         this.y = y;
         this.levelWidth = levelWidth;
-        moving = 0;
+        this.sensitivity = Math.abs(sensitivity);
+        image = ImgUtils.getImage(file);
     }
 
     public Platform() {
-        width = 40;
+        width = 100;
         height = 20;
-        x = 50;
-        y = 50;
+        x = 300 - 100 / 2;
+        y = 400;
         levelWidth = 585;
-        moving = 0;
+        sensitivity = 10;
+        image = ImgUtils.getImage("img/wood/container.jpg");
     }
 
     public void setImage(Image image) {
@@ -34,11 +37,11 @@ public class Platform {
     }
 
     public void moveLeft() {
-        moving = -5;
+        moving = -sensitivity;
     }
 
     public void moveRight() {
-        moving = 5;
+        moving = sensitivity;
     }
 
     public void stop() {
@@ -49,15 +52,11 @@ public class Platform {
         if(moving < 0) {
             if(x + moving >= 0) x += moving;
         } else if (moving > 0) {
-            System.out.println(x + width + moving);
             if(x + width + moving <= levelWidth) x += moving;
         }
     }
 
-    // @TODO: add platform image
-    public void draw(Graphics g) {
-        g.setColor(Color.RED);
-        g.fillRect(x, y, width, height);
-        g.drawRect (x, y, width, height);
+    public void draw(Graphics2D g) {
+        g.drawImage(image, x, y, width, height, null);
     }
 }

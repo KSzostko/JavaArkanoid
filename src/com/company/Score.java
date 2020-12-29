@@ -18,4 +18,9 @@ public class Score
         return points;
     }
 
+    @Override
+    public String toString() {
+        return "User " + username + " scored " + points + " points";
+    }
+
 }
