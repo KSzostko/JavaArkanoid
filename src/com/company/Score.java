@@ -1,6 +1,7 @@
 package com.company;
 
-public class Score {
+public class Score
+{
     private String username;
     private int points;
 
@@ -16,4 +17,5 @@ public class Score {
     public int getPoints() {
         return points;
     }
+
 }
