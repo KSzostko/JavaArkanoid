@@ -1,30 +1,20 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.util.*;
 
-public class Ranking {
+public class Ranking
+{
     private List<Score> scores;
 
-    public Ranking() {
-        scores = new ArrayList<>();
-        // load current ranking from file
+    private String file_path = "JavaArkanoid\\files\\ranking.txt";
 
-        // test data, will be removed later
-        scores.add(new Score("Anon", 123));
-        scores.add(new Score("Anon1", 2123));
-        scores.add(new Score("Anon2", 3123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
-        scores.add(new Score("Anon3", 4123));
+    public Ranking()
+    {
+        // load current ranking from file
+        scores = loadScores(file_path);
     }
 
     public List<Score> getScores() {
@@ -39,9 +29,39 @@ public class Ranking {
         return scores.get(index);
     }
 
-    // @TODO: Sort scores after adding new one
-    public void addScore(Score score) {
+
+    public void addScore(Score score)
+    {
         scores.add(score);
-        // update ranking file
+
+        // sorotwanie
     }
+
+    // Wczytywanie listy z pliku
+    private List<Score> loadScores(String path)
+    {
+        List<Score> list = new ArrayList<>();
+
+        try
+        {
+            File myObj = new File(path);
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine())
+            {
+                String[] data = myReader.nextLine().split(" ");
+                System.out.println(data);
+
+                Score score = new Score(data[0], Integer.parseInt(data[1]));
+                list.add(score);
+            }
+            return list;
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return list;
+        }
+    }
+
+
 }
