@@ -56,7 +56,7 @@ public class Platform {
         }
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         g.drawImage(image, x, y, width, height, null);
     }
 }

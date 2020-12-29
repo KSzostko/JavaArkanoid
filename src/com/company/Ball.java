@@ -25,7 +25,7 @@ public class Ball {
         speedY = -3;
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics2D g) {
         g.drawOval(x, y, radius, radius);
         g.fillOval(x, y, radius, radius);
         g.setColor(Color.RED);

@@ -48,9 +48,10 @@ public class Level extends JPanel {
 
     @Override
     public void paint(Graphics g) {
-        super.paint(g);
+        Graphics2D g2d = (Graphics2D)g.create();
+        super.paint(g2d);
 
-        platform.draw(g);
-        ball.draw(g);
+        platform.draw(g2d);
+        ball.draw(g2d);
     }
 }
