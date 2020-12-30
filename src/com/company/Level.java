@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 public class Level extends JPanel {
     private Platform platform;
     private Ball ball;
+    private Point ballPoint = new Point(80, 300);
 
     public Level(Platform platform, Ball ball) {
         this.platform = platform;
@@ -43,7 +44,25 @@ public class Level extends JPanel {
             }
         });
 
-        new Thread(new LevelController(this, platform, ball)).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true) {
+                    platform.tick();
+                    ballPoint = ball.move(ballPoint);
+
+                    repaint();
+                    Thread.yield();
+
+                    try {
+                        Thread.sleep(10);
+                    }
+                    catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
     }
 
     @Override
@@ -52,6 +71,7 @@ public class Level extends JPanel {
         super.paint(g2d);
 
         platform.draw(g2d);
-        ball.draw(g2d);
+        // hardcoded radius needs to be changed
+        ball.draw(g2d, ballPoint, 20);
     }
 }

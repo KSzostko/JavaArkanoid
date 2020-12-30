@@ -4,96 +4,48 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Ball {
-    private int radius;
-    private int x;
-    private int y;
-    private int speedX;
-    private int speedY;
+    // @TODO: add ball image
+    private Image img;
+    private Speed speed;
+    // hardcoded for movement test
+    private int levelWidth = 585 - 20;
 
-    public Ball(int radius, int x, int y, int speedX, int speedY) {
-        this.radius = radius;
-        this.x = x;
-        this.y = y;
-        this.speedX = speedX;
-        this.speedY = speedY;
+    public Ball(Speed speed) {
+        this.speed = speed;
     }
 
     public Ball() {
-        radius = 20;
-        x = 80;
-        y = 300;
-        speedX = -3;
-        speedY = -3;
+        speed = new Speed(-3, -3);
+        //radius = 20;
+        //x = 80;
+        //y = 300;
     }
 
-    public int getRadius() {
-        return radius;
-    }
-
-    public void setRadius(int radius) {
-        this.radius = radius;
-    }
-
-    public int getSpeedX() {
-        return speedX;
-    }
-
-    public void setSpeedX(int speedX) {
-        this.speedX = speedX;
-    }
-
-    public int getSpeedY() {
-        return speedY;
-    }
-
-    public void setSpeedY(int speedY) {
-        this.speedY = speedY;
-    }
-
-    public void draw(Graphics2D g) {
-        g.drawOval(x, y, radius, radius);
-        g.fillOval(x, y, radius, radius);
+    public void draw(Graphics2D g, Point p, int radius) {
+        g.drawOval(p.getX(), p.getY(), radius, radius);
+        g.fillOval(p.getX(), p.getY(), radius, radius);
         g.setColor(Color.RED);
     }
 
-    public void move() {
+    public Point move(Point prev) {
         // @TODO: ball should have levelWidth and platform coords
         // hardcoded value will be removed
         // this is for testing ball movement
-        speedX = adjustSpeedXVector();
-        x += speedX;
-
-        speedY = adjustSpeedYVector();
-        y += speedY;
-    }
-    public int adjustSpeedXVector() {
-        if(x >= getLevelEnd()) {
-            return -speedX;
+        if(prev.getX() >= levelWidth) {
+            speed.setVectorX(speed.getVectorX() * -1);
         }
 
-        if(x <= 0) {
-            return -speedX;
+        if(prev.getX() <= 0) {
+            speed.setVectorX(speed.getVectorX() * -1);
         }
 
-        return speedX;
-    }
-
-
-    public int adjustSpeedYVector() {
-        if(y <= 0) {
-            return -speedY;
+        if(prev.getY() <= 0) {
+            speed.setVectorY(speed.getVectorY() * -1);
         }
-        // condition if ball is below platform level
-        // then it's game over
-        // or if ball hit platform or block there need to be update here
 
-        return speedY;
-    }
+        // condition if it was on platform level or smth like this
 
-    // hardcoded value for now
-    // later will be updated
-    public int getLevelEnd() {
-        return 585 - radius;
+        return new Point(prev.getX() + speed.getVectorX(), prev.getY() + speed.getVectorY());
     }
 
     //  check if there was collision with the block or platform

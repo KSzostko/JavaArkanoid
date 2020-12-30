@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.commands.*;
+import com.company.decorators.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -109,7 +110,7 @@ public class Game {
         clearScreen();
 
         // this is for platform movement test only
-        Level level = new Level(new Platform(), new BallSpeedDecreaseDecorator(new BallSizeDecreaseDecorator(new Ball())));
+        Level level = new Level(new Platform(), new BallSizeDecreaseDecorator(new BallSpeedDecreaseDecorator(new Ball())));
         frame.getContentPane().add(level);
 
         level.requestFocusInWindow();
