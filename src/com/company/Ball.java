@@ -1,61 +1,62 @@
 package com.company;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.RectangularShape;
 
 public class Ball {
-    private int radius;
-    private int x;
-    private int y;
-    private int speedX;
-    private int speedY;
+    // @TODO: add ball image
+    private Image img;
+    private Speed speed;
+    // hardcoded for movement test
+    private int levelWidth = 585 - 20;
 
-    public Ball(int radius, int x, int y, int speedX, int speedY) {
-        this.radius = radius;
-        this.x = x;
-        this.y = y;
-        this.speedX = speedX;
-        this.speedY = speedY;
+    public Ball(Speed speed) {
+        this.speed = speed;
     }
 
     public Ball() {
-        radius = 20;
-        x = 80;
-        y = 300;
-        speedX = -3;
-        speedY = -3;
+        speed = new Speed(-3, -3);
+        //radius = 20;
+        //x = 80;
+        //y = 300;
     }
 
-    public void draw(Graphics2D g) {
-        g.drawOval(x, y, radius, radius);
-        g.fillOval(x, y, radius, radius);
+    public void draw(Graphics2D g, Point p, int radius) {
+        g.drawOval(p.getX(), p.getY(), radius, radius);
+        g.fillOval(p.getX(), p.getY(), radius, radius);
         g.setColor(Color.RED);
     }
 
-    public void move() {
+    public Point move(Point prev) {
         // @TODO: ball should have levelWidth and platform coords
         // hardcoded value will be removed
         // this is for testing ball movement
-        if(x >= 585 - radius) {
-            speedX *= -1;
+        if(prev.getX() >= levelWidth) {
+            speed.setVectorX(speed.getVectorX() * -1);
         }
 
-        if(x <= 0) {
-            speedX *= -1;
+        if(prev.getX() <= 0) {
+            speed.setVectorX(speed.getVectorX() * -1);
         }
 
-        x += speedX;
-
-        if(y <= 0) {
-            speedY *= -1;
+        if(prev.getY() <= 0) {
+            speed.setVectorY(speed.getVectorY() * -1);
         }
-        // condition if ball is below platform level
-        // then it's game over
-        y += speedY;
+
+        // condition if it was on platform level or smth like this
+
+        return new Point(prev.getX() + speed.getVectorX(), prev.getY() + speed.getVectorY());
     }
 
     //  check if there was collision with the block or platform
     // if there was, multiply by -1
     public void collide() {
 
+    }
+
+    public Ellipse2D getBounds(Point prev, int radius) {
+        return new Ellipse2D.Double(prev.getX(), prev.getY(), radius, radius);
     }
 }

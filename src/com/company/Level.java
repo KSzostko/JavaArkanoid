@@ -4,14 +4,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.RectangularShape;
 
 public class Level extends JPanel {
     private Platform platform;
     private Ball ball;
+    private Point ballPoint = new Point(80, 300);
+    // later it will be list of bonuses
+    private Bonus bonus;
 
-    public Level(Platform platform, Ball ball) {
+    public Level(Platform platform, Ball ball, Bonus bonus) {
         this.platform = platform;
         this.ball = ball;
+        this.bonus = bonus;
 
         initLevel();
     }
@@ -43,7 +49,40 @@ public class Level extends JPanel {
             }
         });
 
-        new Thread(new LevelController(this, platform, ball)).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true) {
+                    platform.tick();
+                    ballPoint = ball.move(ballPoint);
+                    //System.out.println(ball.getBounds(ballPoint, 20).getX());
+
+                    checkCollision();
+
+                    repaint();
+                    Thread.yield();
+
+                    try {
+                        Thread.sleep(10);
+                    }
+                    catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            private void checkCollision() {
+                Ellipse2D ballBounds = ball.getBounds(ballPoint, 20);
+                Rectangle bonusBounds = bonus.getBounds();
+
+                // later we will be checking whole lists
+                if(ballBounds.intersects(bonusBounds.getX(), bonusBounds.getY(), bonusBounds.getWidth(), bonusBounds.getHeight())) {
+                    System.out.println("Collision detected!");
+                    ball = bonus.addBonus(ball);
+                    // now should be method which will change ball speed vector somehow
+                }
+            }
+        }).start();
     }
 
     @Override
@@ -52,6 +91,8 @@ public class Level extends JPanel {
         super.paint(g2d);
 
         platform.draw(g2d);
-        ball.draw(g2d);
+        bonus.draw(g2d);
+        // hardcoded radius needs to be changed
+        ball.draw(g2d, ballPoint, 20);
     }
 }
