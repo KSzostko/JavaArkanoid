@@ -2,6 +2,8 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.RectangularShape;
 
 public class Ball {
     // @TODO: add ball image
@@ -52,5 +54,9 @@ public class Ball {
     // if there was, multiply by -1
     public void collide() {
 
+    }
+
+    public Ellipse2D getBounds(Point prev, int radius) {
+        return new Ellipse2D.Double(prev.getX(), prev.getY(), radius, radius);
     }
 }
