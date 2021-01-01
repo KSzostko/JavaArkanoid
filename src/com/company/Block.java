@@ -1,6 +1,6 @@
 package com.company;
 
-import states.State;
+import com.company.states.State;
 
 import java.awt.*;
 

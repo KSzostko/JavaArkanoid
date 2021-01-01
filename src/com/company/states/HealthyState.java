@@ -1,10 +1,10 @@
-package states;
+package com.company.states;
 
 import com.company.Block;
 
-public class HitState extends State
+public class HealthyState extends State
 {
-    public HitState(Block block)
+    public HealthyState(Block block)
     {
         super(block);
     }
