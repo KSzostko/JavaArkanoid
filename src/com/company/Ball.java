@@ -1,9 +1,7 @@
 package com.company;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.RectangularShape;
 
 public class Ball {
     // @TODO: add ball image
@@ -18,9 +16,6 @@ public class Ball {
 
     public Ball() {
         speed = new Speed(-3, -3);
-        //radius = 20;
-        //x = 80;
-        //y = 300;
     }
 
     public void draw(Graphics2D g, Point p, int radius) {

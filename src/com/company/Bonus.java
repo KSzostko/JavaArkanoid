@@ -2,16 +2,18 @@ package com.company;
 
 import com.company.decorators.*;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.RectangularShape;
 
-public class Bonus {
+// this has to extend from JComponent because otherwise we can't remove it from JPanel
+public class Bonus extends JComponent {
     private int width;
     private int height;
     private int x;
     private int y;
     private Image image;
     private Type type;
+    private boolean removed = false;
 
     public Bonus(int width, int height, int x, int y, Image image, Type type) {
         this.width = width;
@@ -47,6 +49,10 @@ public class Bonus {
         return y;
     }
 
+    public boolean isRemoved() {
+        return removed;
+    }
+
     public void draw(Graphics2D g) {
         g.drawImage(image, x, y, width, height, null);
     }
@@ -56,6 +62,7 @@ public class Bonus {
     }
 
     public Ball addBonus(Ball ball) {
+        removed = true;
         switch(type) {
             case SIZE_INCREASE:
                 return new BallSizeIncreaseDecorator(ball);

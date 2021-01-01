@@ -55,7 +55,6 @@ public class Level extends JPanel {
                 while(true) {
                     platform.tick();
                     ballPoint = ball.move(ballPoint);
-                    //System.out.println(ball.getBounds(ballPoint, 20).getX());
 
                     checkCollision();
 
@@ -79,7 +78,11 @@ public class Level extends JPanel {
                 if(ballBounds.intersects(bonusBounds.getX(), bonusBounds.getY(), bonusBounds.getWidth(), bonusBounds.getHeight())) {
                     System.out.println("Collision detected!");
                     ball = bonus.addBonus(ball);
-                    // now should be method which will change ball speed vector somehow
+                    // now should be method which will change ball speed vector somehow UPDATE: Only if it will hit block, not bonus
+                    // bonus will just disappear
+                    remove(bonus);
+                    revalidate();
+                    repaint();
                 }
             }
         }).start();
@@ -91,7 +94,9 @@ public class Level extends JPanel {
         super.paint(g2d);
 
         platform.draw(g2d);
-        bonus.draw(g2d);
+        if(!bonus.isRemoved()) {
+            bonus.draw(g2d);
+        }
         // hardcoded radius needs to be changed
         ball.draw(g2d, ballPoint, 20);
     }
