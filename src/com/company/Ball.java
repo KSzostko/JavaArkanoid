@@ -1,9 +1,11 @@
 package com.company;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.util.Random;
 
-public class Ball {
+public class Ball extends JComponent {
     // @TODO: add ball image
     private Image img;
     private Speed speed;
@@ -40,9 +42,24 @@ public class Ball {
         return new Point(prev.getX() + speed.getVectorX(), prev.getY() + speed.getVectorY());
     }
 
-    public void collide() {
-        // when x changes it is probably less natural
-        //speed.setVectorX(speed.getVectorX() * -1);
+    public void collide(JComponent component) {
+        // collision with ball and blocks should look slightly different
+
+        if(component instanceof Block) {
+            speed.setVectorX(speed.getVectorX() * -1);
+        } else {
+            // collision with platform
+
+            // this probably can be even better
+            // any idea is welcomed
+            Random random = new Random();
+            boolean changeDir = random.nextBoolean();
+
+            if(changeDir) {
+                speed.setVectorX(speed.getVectorX() * -1);
+            }
+        }
+
         speed.setVectorY(speed.getVectorY() * -1);
     }
 

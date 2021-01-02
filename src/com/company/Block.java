@@ -2,35 +2,56 @@ package com.company;
 
 import com.company.states.State;
 
+import javax.swing.*;
 import java.awt.*;
 
 
 // to tylko zarys bo jeszcze nie do końca ogarniam jak to ma wyglądać
-public class Block
-{
+public class Block extends JComponent {
     private State state;
     //
     private int x;
     private int y;
+    private int width;
+    private int height;
     private int endurance;
     //
     private Image img;
+    private boolean removed = false;
 
-    public Block(Image img, int x, int y, int endurance)
+    public Block(Image img, int x, int y, int width, int height, int endurance)
     {
         this.x = x;
         this.y = y;
+        this.width = width;
+        this.height = height;
         this.endurance = endurance;
         //
         this.img = img;
 
     }
 
-    public void draw(Graphics2D g, Point p)
+    // just for object quick creation while testing
+    public Block() {
+        this.x = 50;
+        this.y = 190;
+        this.width = 100;
+        this.height = 40;
+        this.endurance = 2;
+        this.img = ImgUtils.getImage("img/wood/container.jpg");
+    }
+
+    public boolean isRemoved() {
+        return removed;
+    }
+
+    public void draw(Graphics2D g)
     {
-        // nie wiem czy to ma być położenie z klasy czy z punktu
-        //g.drawImage(img, x, y, null);
-        g.drawImage(img, p.getX(), p.getY(), null);
+        g.drawImage(img, x, y, width, height, null);
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
     }
 
     public void setState(State state)
@@ -50,5 +71,8 @@ public class Block
 
     // public void hit();
 
-    // public void destroy();
+     public void destroy() {
+        // here will be more code of course
+        removed = true;
+     }
 }

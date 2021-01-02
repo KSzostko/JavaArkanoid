@@ -110,7 +110,7 @@ public class Game {
         clearScreen();
 
         // this is for platform movement test only
-        Level level = new Level(new Platform(), new Ball(), new Bonus());
+        Level level = new Level(new Platform(), new Ball(), new Block(), new Bonus());
         frame.getContentPane().add(level);
 
         level.requestFocusInWindow();

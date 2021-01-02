@@ -10,12 +10,15 @@ public class Level extends JPanel {
     private Platform platform;
     private Ball ball;
     private Point ballPoint = new Point(80, 300);
+    // later it will be list of blocks
+    private Block block;
     // later it will be list of bonuses
     private Bonus bonus;
 
-    public Level(Platform platform, Ball ball, Bonus bonus) {
+    public Level(Platform platform, Ball ball, Block block, Bonus bonus) {
         this.platform = platform;
         this.ball = ball;
+        this.block = block;
         this.bonus = bonus;
 
         initLevel();
@@ -73,6 +76,7 @@ public class Level extends JPanel {
                 Ellipse2D ballBounds = ball.getBounds(ballPoint, 20);
                 Rectangle bonusBounds = bonus.getBounds();
                 Rectangle platformBounds = platform.getBounds();
+                Rectangle blockBonuds = block.getBounds();
 
                 // later we will be checking whole lists
                 // collision with the bonus
@@ -91,8 +95,15 @@ public class Level extends JPanel {
                     System.out.println("Game over!");
                 }
 
+                // platform was hit by ball
                 if(ballBounds.intersects(platformBounds.getX(), platformBounds.getY(), platformBounds.getWidth(), platformBounds.getHeight())) {
-                    ball.collide();
+                    ball.collide(ball);
+                }
+
+                if(ballBounds.intersects(blockBonuds.getX(), blockBonuds.getY(), blockBonuds.getWidth(), blockBonuds.getHeight())
+                && !block.isRemoved()) {
+                    // here will be check if it has endurance, if not we need to remove it
+                    ball.collide(block);
                 }
             }
         }).start();
@@ -104,9 +115,15 @@ public class Level extends JPanel {
         super.paint(g2d);
 
         platform.draw(g2d);
+
         if(!bonus.isRemoved()) {
             bonus.draw(g2d);
         }
+
+        if(!block.isRemoved()) {
+            block.draw(g2d);
+        }
+
         // hardcoded radius needs to be changed
         ball.draw(g2d, ballPoint, 20);
     }
