@@ -30,7 +30,7 @@ public class Bonus extends JComponent {
         this.x = 50;
         this.y = 200;
         this.image = ImgUtils.getImage("img/wood/container.jpg");
-        type = Type.SPEED_INCREASE;
+        type = Type.SIZE_INCREASE;
     }
 
     public int getWidth() {

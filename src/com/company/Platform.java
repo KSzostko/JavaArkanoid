@@ -1,8 +1,9 @@
 package com.company;
 
+import javax.swing.*;
 import java.awt.*;
 
-public class Platform {
+public class Platform extends JComponent {
     private int width;
     private int height;
     private int x;
@@ -58,5 +59,9 @@ public class Platform {
 
     public void draw(Graphics2D g) {
         g.drawImage(image, x, y, width, height, null);
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
     }
 }

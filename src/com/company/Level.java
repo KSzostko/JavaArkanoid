@@ -73,16 +73,21 @@ public class Level extends JPanel {
             private void checkCollision() {
                 Ellipse2D ballBounds = ball.getBounds(ballPoint, 20);
                 Rectangle bonusBounds = bonus.getBounds();
+                Rectangle platformBounds = platform.getBounds();
 
                 // later we will be checking whole lists
-                if(ballBounds.intersects(bonusBounds.getX(), bonusBounds.getY(), bonusBounds.getWidth(), bonusBounds.getHeight())) {
+                if(ballBounds.intersects(bonusBounds.getX(), bonusBounds.getY(), bonusBounds.getWidth(), bonusBounds.getHeight())
+                && !bonus.isRemoved()) {
                     System.out.println("Collision detected!");
                     ball = bonus.addBonus(ball);
-                    // now should be method which will change ball speed vector somehow UPDATE: Only if it will hit block, not bonus
-                    // bonus will just disappear
+
                     remove(bonus);
                     revalidate();
                     repaint();
+                }
+
+                if(ballBounds.intersects(platformBounds.getX(), platformBounds.getY(), platformBounds.getWidth(), platformBounds.getHeight())) {
+                    ball.collide();
                 }
             }
         }).start();
