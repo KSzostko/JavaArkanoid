@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.RectangularShape;
 
 public class Level extends JPanel {
     private Platform platform;
@@ -76,6 +75,7 @@ public class Level extends JPanel {
                 Rectangle platformBounds = platform.getBounds();
 
                 // later we will be checking whole lists
+                // collision with the bonus
                 if(ballBounds.intersects(bonusBounds.getX(), bonusBounds.getY(), bonusBounds.getWidth(), bonusBounds.getHeight())
                 && !bonus.isRemoved()) {
                     System.out.println("Collision detected!");
@@ -84,6 +84,11 @@ public class Level extends JPanel {
                     remove(bonus);
                     revalidate();
                     repaint();
+                }
+
+                // ball below platform is game over
+                if(platformBounds.getY() - ballBounds.getHeight() < ballBounds.getY() - 1) {
+                    System.out.println("Game over!");
                 }
 
                 if(ballBounds.intersects(platformBounds.getX(), platformBounds.getY(), platformBounds.getWidth(), platformBounds.getHeight())) {
