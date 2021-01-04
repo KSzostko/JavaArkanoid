@@ -51,6 +51,10 @@ public class Level extends JPanel {
             }
         });
 
+        startLevel();
+    }
+
+    private void startLevel() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -81,7 +85,7 @@ public class Level extends JPanel {
                 // later we will be checking whole lists
                 // collision with the bonus
                 if(ballBounds.intersects(bonusBounds.getX(), bonusBounds.getY(), bonusBounds.getWidth(), bonusBounds.getHeight())
-                && !bonus.isRemoved()) {
+                        && !bonus.isRemoved()) {
                     System.out.println("Collision detected!");
                     ball = bonus.addBonus(ball);
 
@@ -101,7 +105,7 @@ public class Level extends JPanel {
                 }
 
                 if(ballBounds.intersects(blockBonuds.getX(), blockBonuds.getY(), blockBonuds.getWidth(), blockBonuds.getHeight())
-                && !block.isRemoved()) {
+                        && !block.isRemoved()) {
                     // here will be check if it has endurance, if not we need to remove it
                     ball.collide(block);
                 }
