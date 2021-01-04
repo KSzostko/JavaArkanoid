@@ -15,20 +15,20 @@ public class Bonus extends JComponent {
     private Type type;
     private boolean removed = false;
 
-    public Bonus(int width, int height, int x, int y, Image image, Type type) {
+    public Bonus(int width, int height, int x, int y, Type type, String imagePath) {
         this.width = width;
         this.height = height;
         this.x = x;
         this.y = y;
-        this.image = image;
         this.type = type;
+        this.image = ImgUtils.getImage(imagePath);
     }
 
     public Bonus() {
         this.width = 20;
         this.height = 20;
-        this.x = 30;
-        this.y = 10;
+        this.x = 50;
+        this.y = 100;
         this.image = ImgUtils.getImage("img/wood/container.jpg");
         type = Type.SPEED_DECREASE;
     }

@@ -19,7 +19,7 @@ public class Block extends JComponent {
     private Image img;
     private boolean removed = false;
 
-    public Block(Image img, int x, int y, int width, int height, int endurance)
+    public Block(String imgPath, int x, int y, int width, int height, int endurance)
     {
         this.x = x;
         this.y = y;
@@ -27,7 +27,7 @@ public class Block extends JComponent {
         this.height = height;
         this.endurance = endurance;
         //
-        this.img = img;
+        this.img = ImgUtils.getImage(imgPath);
 
     }
 

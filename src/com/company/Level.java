@@ -5,21 +5,20 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Ellipse2D;
+import java.util.List;
 
 public class Level extends JPanel {
     private Platform platform;
     private Ball ball;
     private Point ballPoint = new Point(80, 300);
-    // later it will be list of blocks
-    private Block block;
-    // later it will be list of bonuses
-    private Bonus bonus;
+    private List<Block> blocks;
+    private List<Bonus> bonuses;
 
-    public Level(Platform platform, Ball ball, Block block, Bonus bonus) {
+    public Level(Platform platform, Ball ball, List<Block> blocks, List<Bonus> bonuses) {
         this.platform = platform;
         this.ball = ball;
-        this.block = block;
-        this.bonus = bonus;
+        this.blocks = blocks;
+        this.bonuses = bonuses;
 
         initLevel();
     }
@@ -78,20 +77,24 @@ public class Level extends JPanel {
 
             private void checkCollision() {
                 Ellipse2D ballBounds = ball.getBounds(ballPoint, 20);
-                Rectangle bonusBounds = bonus.getBounds();
                 Rectangle platformBounds = platform.getBounds();
-                Rectangle blockBonuds = block.getBounds();
 
-                // later we will be checking whole lists
                 // collision with the bonus
-                if(ballBounds.intersects(bonusBounds.getX(), bonusBounds.getY(), bonusBounds.getWidth(), bonusBounds.getHeight())
-                        && !bonus.isRemoved()) {
-                    System.out.println("Collision detected!");
-                    ball = bonus.addBonus(ball);
+                for(Bonus bonus : bonuses) {
+                    Rectangle bonusBounds = bonus.getBounds();
+                    if(ballBounds.intersects(bonusBounds.getX(), bonusBounds.getY(), bonusBounds.getWidth(), bonusBounds.getHeight())
+                            && !bonus.isRemoved()) {
+                        System.out.println("Collision detected!");
+                        ball = bonus.addBonus(ball);
 
-                    remove(bonus);
-                    revalidate();
-                    repaint();
+                        remove(bonus);
+                        revalidate();
+                        repaint();
+
+                        // probably only on bonus can be hit at the moment
+                        // so there's no need to check the others
+                        break;
+                    }
                 }
 
                 // ball below platform is game over
@@ -104,19 +107,24 @@ public class Level extends JPanel {
                     ball.collide(ball);
                 }
 
-                if(ballBounds.intersects(blockBonuds.getX(), blockBonuds.getY(), blockBonuds.getWidth(), blockBonuds.getHeight())
-                        && !block.isRemoved()) {
-                    // here will be check if it has endurance, if not we need to remove it
-                    block.hit();
-                    if(!block.hasEndurance()) {
-                        block.destroy();
+                for(Block block : blocks) {
+                    Rectangle blockBounds = block.getBounds();
+                    if(ballBounds.intersects(blockBounds.getX(), blockBounds.getY(), blockBounds.getWidth(), blockBounds.getHeight())
+                            && !block.isRemoved()) {
+                        block.hit();
+                        ball.collide(block);
 
-                        remove(block);
-                        revalidate();
-                        repaint();
+                        if(!block.hasEndurance()) {
+                            block.destroy();
+
+                            remove(block);
+                            revalidate();
+                            repaint();
+
+                            // same as with bonuses
+                            break;
+                        }
                     }
-
-                    ball.collide(block);
                 }
             }
         }).start();
@@ -129,12 +137,16 @@ public class Level extends JPanel {
 
         platform.draw(g2d);
 
-        if(!bonus.isRemoved()) {
-            bonus.draw(g2d);
+        for(Bonus bonus : bonuses) {
+            if(!bonus.isRemoved()) {
+                bonus.draw(g2d);
+            }
         }
 
-        if(!block.isRemoved()) {
-            block.draw(g2d);
+        for(Block block : blocks) {
+            if(!block.isRemoved()) {
+                block.draw(g2d);
+            }
         }
 
         // hardcoded radius needs to be changed

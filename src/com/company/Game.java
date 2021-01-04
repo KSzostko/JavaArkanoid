@@ -1,11 +1,12 @@
 package com.company;
 
 import com.company.commands.*;
-import com.company.decorators.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
     private JFrame frame;
@@ -109,8 +110,16 @@ public class Game {
     public void startLevel() {
         clearScreen();
 
-        // this is for platform movement test only
-        Level level = new Level(new Platform(), new Ball(), new Block(), new Bonus());
+        // this is for gameplay test only
+        List<Block> blocks = new ArrayList<>();
+        blocks.add(new Block());
+        blocks.add(new Block("img/wood/container.jpg", 90, 150, 100, 40, 3));
+
+        List<Bonus> bonuses = new ArrayList<>();
+        bonuses.add(new Bonus());
+        bonuses.add(new Bonus(20, 20, 200, 300, Bonus.Type.SIZE_INCREASE, "img/wood/container.jpg"));
+
+        Level level = new Level(new Platform(), new Ball(), blocks, bonuses);
         frame.getContentPane().add(level);
 
         level.requestFocusInWindow();
