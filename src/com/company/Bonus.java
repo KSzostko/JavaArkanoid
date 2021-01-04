@@ -12,7 +12,6 @@ public class Bonus extends JComponent {
 
     private Image image;
     private Type type;
-    private boolean removed = false;
 
     public Bonus(Type type, String imagePath) {
         this.type = type;
@@ -20,14 +19,8 @@ public class Bonus extends JComponent {
     }
 
     public Bonus() {
-//        this.x = 50;
-//        this.y = 100;
         this.image = ImgUtils.getImage("img/wood/container.jpg");
         type = Type.SPEED_DECREASE;
-    }
-
-    public boolean isRemoved() {
-        return removed;
     }
 
     public void draw(Graphics2D g, Point p) {
@@ -39,7 +32,6 @@ public class Bonus extends JComponent {
     }
 
     public Ball addBonus(Ball ball) {
-        removed = true;
         switch(type) {
             case SIZE_INCREASE:
                 return new BallSizeIncreaseDecorator(ball);

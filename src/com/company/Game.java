@@ -6,7 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Game {
     private JFrame frame;
@@ -115,9 +117,10 @@ public class Game {
         blocks.add(new Block());
         blocks.add(new Block("img/wood/container.jpg", 90, 150, 100, 40, 3));
 
-        List<Bonus> bonuses = new ArrayList<>();
-//        bonuses.add(new Bonus());
-//        bonuses.add(new Bonus(20, 20, 200, 300, Bonus.Type.SIZE_INCREASE, "img/wood/container.jpg"));
+        Map<Point, Bonus> bonuses = new HashMap<>();
+        // instead of new Bonus constructor we will use later BonusFactory
+        bonuses.put(new Point(50, 100), new Bonus());
+        bonuses.put(new Point(200, 300), new Bonus(Bonus.Type.SIZE_INCREASE, "img/wood/container.jpg"));
 
         Level level = new Level(new Platform(), new Ball(), blocks, bonuses);
         frame.getContentPane().add(level);
