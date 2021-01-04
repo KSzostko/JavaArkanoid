@@ -95,7 +95,7 @@ public class Level extends JPanel {
                 }
 
                 // ball below platform is game over
-                if(platformBounds.getY() - ballBounds.getHeight() < ballBounds.getY() - 1) {
+                if(platformBounds.getY() - ballBounds.getHeight() < ballBounds.getY() - 3) {
                     System.out.println("Game over!");
                 }
 
@@ -107,6 +107,15 @@ public class Level extends JPanel {
                 if(ballBounds.intersects(blockBonuds.getX(), blockBonuds.getY(), blockBonuds.getWidth(), blockBonuds.getHeight())
                         && !block.isRemoved()) {
                     // here will be check if it has endurance, if not we need to remove it
+                    block.hit();
+                    if(!block.hasEndurance()) {
+                        block.destroy();
+
+                        remove(block);
+                        revalidate();
+                        repaint();
+                    }
+
                     ball.collide(block);
                 }
             }

@@ -45,6 +45,10 @@ public class Block extends JComponent {
         return removed;
     }
 
+    public boolean hasEndurance() {
+        return endurance > 0;
+    }
+
     public void draw(Graphics2D g)
     {
         g.drawImage(img, x, y, width, height, null);
@@ -69,7 +73,10 @@ public class Block extends JComponent {
         this.state.changeImage();
     }
 
-    // public void hit();
+    public void hit() {
+        endurance--;
+        // here will be some state change
+    }
 
      public void destroy() {
         // here will be more code of course
