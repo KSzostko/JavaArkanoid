@@ -5,16 +5,19 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Ellipse2D;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class Level extends JPanel {
     private Platform platform;
     private Ball ball;
     private Point ballPoint = new Point(80, 300);
     private List<Block> blocks;
-    private List<Bonus> bonuses;
+    private Map<Point, Bonus> bonuses;
+//    private List<Bonus> bonuses;
 
-    public Level(Platform platform, Ball ball, List<Block> blocks, List<Bonus> bonuses) {
+    public Level(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses) {
         this.platform = platform;
         this.ball = ball;
         this.blocks = blocks;
@@ -80,9 +83,12 @@ public class Level extends JPanel {
                 Rectangle platformBounds = platform.getBounds();
 
                 // collision with the bonus
-                for(Bonus bonus : bonuses) {
-                    Rectangle bonusBounds = bonus.getBounds();
-                    if(ballBounds.intersects(bonusBounds.getX(), bonusBounds.getY(), bonusBounds.getWidth(), bonusBounds.getHeight())
+                for (Map.Entry<Point, Bonus> entry : bonuses.entrySet()) {
+                    Point p = entry.getKey();
+                    Bonus bonus = entry.getValue();
+                    Rectangle bonusBounds = bonus.getBounds(p);
+
+                    if (ballBounds.intersects(bonusBounds.getX(), bonusBounds.getY(), bonusBounds.getWidth(), bonusBounds.getHeight())
                             && !bonus.isRemoved()) {
                         System.out.println("Collision detected!");
                         ball = bonus.addBonus(ball);
@@ -137,9 +143,12 @@ public class Level extends JPanel {
 
         platform.draw(g2d);
 
-        for(Bonus bonus : bonuses) {
-            if(!bonus.isRemoved()) {
-                bonus.draw(g2d);
+        for (Map.Entry<Point, Bonus> entry : bonuses.entrySet()) {
+            Point p = entry.getKey();
+            Bonus bonus = entry.getValue();
+
+            if (!bonus.isRemoved()) {
+                bonus.draw(g2d, p);
             }
         }
 
