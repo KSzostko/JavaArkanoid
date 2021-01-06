@@ -8,23 +8,22 @@ import java.awt.*;
 
 // to tylko zarys bo jeszcze nie do końca ogarniam jak to ma wyglądać
 public class Block extends JComponent {
+    public static final int WIDTH = 100;
+    public static final int HEIGHT = 30;
+
     private State state;
     //
     private int x;
     private int y;
-    private int width;
-    private int height;
     private int endurance;
     //
     private Image img;
     private boolean removed = false;
 
-    public Block(String imgPath, int x, int y, int width, int height, int endurance)
+    public Block(String imgPath, int x, int y, int endurance)
     {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
         this.endurance = endurance;
         //
         this.img = ImgUtils.getImage(imgPath);
@@ -35,8 +34,6 @@ public class Block extends JComponent {
     public Block() {
         this.x = 50;
         this.y = 190;
-        this.width = 100;
-        this.height = 40;
         this.endurance = 2;
         this.img = ImgUtils.getImage("img/wood/container.jpg");
     }
@@ -51,11 +48,11 @@ public class Block extends JComponent {
 
     public void draw(Graphics2D g)
     {
-        g.drawImage(img, x, y, width, height, null);
+        g.drawImage(img, x, y, WIDTH, HEIGHT, null);
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
+        return new Rectangle(x, y, WIDTH, HEIGHT);
     }
 
     public void setState(State state)

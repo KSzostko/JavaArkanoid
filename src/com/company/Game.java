@@ -115,7 +115,7 @@ public class Game {
         // this is for gameplay test only
         List<Block> blocks = new ArrayList<>();
         blocks.add(new Block());
-        blocks.add(new Block("img/wood/container.jpg", 90, 150, 100, 40, 3));
+        blocks.add(new Block("img/wood/container.jpg", 90, 150, 3));
 
         Map<Point, Bonus> bonuses = new HashMap<>();
         // instead of new Bonus constructor we will use later BonusFactory
