@@ -4,8 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Platform extends JComponent {
-    private int width;
-    private int height;
+    public static final int WIDTH = 100;
+    public static final int HEIGHT = 20;
+
     private int x;
     private int y;
     private int levelWidth;
@@ -13,9 +14,7 @@ public class Platform extends JComponent {
     private int moving = 0;
     private final int sensitivity;
 
-    public Platform(int width, int height, int x, int y, int levelWidth, int sensitivity, String file) {
-        this.width = width;
-        this.height = height;
+    public Platform(int x, int y, int levelWidth, int sensitivity, String file) {
         this.x = x;
         this.y = y;
         this.levelWidth = levelWidth;
@@ -24,8 +23,6 @@ public class Platform extends JComponent {
     }
 
     public Platform() {
-        width = 100;
-        height = 20;
         x = 300 - 100 / 2;
         y = 400;
         levelWidth = 585;
@@ -53,15 +50,15 @@ public class Platform extends JComponent {
         if(moving < 0) {
             if(x + moving >= 0) x += moving;
         } else if (moving > 0) {
-            if(x + width + moving <= levelWidth) x += moving;
+            if(x + WIDTH + moving <= levelWidth) x += moving;
         }
     }
 
     public void draw(Graphics2D g) {
-        g.drawImage(image, x, y, width, height, null);
+        g.drawImage(image, x, y, WIDTH, HEIGHT, null);
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
+        return new Rectangle(x, y, WIDTH, HEIGHT);
     }
 }

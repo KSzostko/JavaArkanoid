@@ -112,17 +112,17 @@ public class Game {
     public void startLevel() {
         clearScreen();
 
-        // this is for gameplay test only
-        List<Block> blocks = new ArrayList<>();
-        blocks.add(new Block());
-        blocks.add(new Block("img/wood/container.jpg", 90, 150, 3));
+        // this is for testing only
+        LevelBuilder levelBuilder = new StoneLevelBuilder();
+        levelBuilder.addBall(new Speed(-3, -3));
+        levelBuilder.addPlatform(300 - 100 / 2, 400);
+        levelBuilder.addWeakBlock(50, 190);
+        levelBuilder.addMediumBlock(90, 150);
+        levelBuilder.addPositiveSizeBonus(50, 100);
+        levelBuilder.addPositiveSpeedBonus(200, 300);
 
-        Map<Point, Bonus> bonuses = new HashMap<>();
-        // instead of new Bonus constructor we will use later BonusFactory
-        bonuses.put(new Point(50, 100), new Bonus());
-        bonuses.put(new Point(200, 300), new Bonus(Bonus.Type.SIZE_INCREASE, "img/wood/container.jpg"));
+        Level level = levelBuilder.build();
 
-        Level level = new Level(new Platform(), new Ball(), blocks, bonuses);
         frame.getContentPane().add(level);
 
         level.requestFocusInWindow();

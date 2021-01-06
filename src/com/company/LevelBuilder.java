@@ -19,7 +19,7 @@ public abstract class LevelBuilder {
     public abstract void addPositiveSpeedBonus(int x, int y);
     public abstract void addPositiveSizeBonus(int x, int y);
     public abstract void addNegativeSizeBonus(int x, int y);
-    public abstract void addBall(int x, int y);
+    public abstract void addBall(Speed speed);
     public abstract void addPlatform(int x, int y);
 
     public Level build() {
