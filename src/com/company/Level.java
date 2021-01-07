@@ -11,6 +11,7 @@ import java.util.Map;
 public class Level extends JPanel {
     private Platform platform;
     private Ball ball;
+    private int ballRadius = 20;
     private Point ballPoint = new Point(80, 300);
     private List<Block> blocks;
     private Map<Point, Bonus> bonuses;
@@ -77,7 +78,7 @@ public class Level extends JPanel {
             }
 
             private void checkCollision() {
-                Ellipse2D ballBounds = ball.getBounds(ballPoint, 20);
+                Ellipse2D ballBounds = ball.getBounds(ballPoint, ballRadius);
                 Rectangle platformBounds = platform.getBounds();
 
                 // collision with the bonus
@@ -154,7 +155,6 @@ public class Level extends JPanel {
             }
         }
 
-        // hardcoded radius needs to be changed
-        ball.draw(g2d, ballPoint, 20);
+        ball.draw(g2d, ballPoint, ballRadius);
     }
 }
