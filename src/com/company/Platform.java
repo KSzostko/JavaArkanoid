@@ -25,7 +25,7 @@ public class Platform extends JComponent {
     public Platform() {
         x = 300 - 100 / 2;
         y = 400;
-        levelWidth = 585;
+        levelWidth = Game.FRAME_WIDTH - 15;
         sensitivity = 10;
         image = ImgUtils.getImage("img/wood/container.jpg");
     }

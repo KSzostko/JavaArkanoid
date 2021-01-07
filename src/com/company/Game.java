@@ -5,12 +5,11 @@ import com.company.commands.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Game {
+    public static final int FRAME_WIDTH = 600;
+    public static final int FRAME_HEIGHT = 500;
+
     private JFrame frame;
     private Ranking ranking;
     //
@@ -29,7 +28,7 @@ public class Game {
 
     private void initScreen() {
         frame = new JFrame("Arkanoid");
-        frame.setSize(600, 500);
+        frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.getContentPane().setBackground(Color.white);
         frame.setLayout(new FlowLayout());
         frame.addWindowListener(new WindowAdapter() {

@@ -9,8 +9,7 @@ public class Ball extends JComponent {
     // @TODO: add ball image
     private Image img;
     private Speed speed;
-    // hardcoded for movement test
-    private int levelWidth = 585 - 20;
+    private int levelWidth = Game.FRAME_WIDTH - 20;
 
     public Ball(Speed speed) {
         this.speed = speed;
