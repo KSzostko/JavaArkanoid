@@ -8,7 +8,7 @@ import java.awt.*;
 // this has to extend from JComponent because otherwise we can't remove it from JPanel
 public class Bonus extends JComponent {
     public static final int WIDTH = 50;
-    public static final int HEIGHT = 20;
+    public static final int HEIGHT = 30;
 
     private Image image;
     private Type type;
