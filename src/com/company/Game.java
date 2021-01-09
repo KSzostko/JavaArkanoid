@@ -12,14 +12,18 @@ public class Game {
 
     private JFrame frame;
     private Ranking ranking;
-    //
     private LevelFileReader levelFileReader;
+    private PositionStrategy strategy;
 
     public Game() {
         // @TODO: add positionStrategy field
         ranking = new Ranking();
         levelFileReader = LevelFileReader.getInstance();
         initScreen();
+    }
+
+    public void setStrategy(PositionStrategy strategy) {
+        this.strategy = strategy;
     }
 
     public JFrame getFrame() {
@@ -111,16 +115,9 @@ public class Game {
     public void startLevel() {
         clearScreen();
 
-        // this is for testing only
-        LevelBuilder levelBuilder = new StoneLevelBuilder();
-        levelBuilder.addBall(new Speed(-3, -3));
-        levelBuilder.addPlatform(300 - 100 / 2, 400);
-        levelBuilder.addWeakBlock(50, 190);
-        levelBuilder.addMediumBlock(90, 150);
-        levelBuilder.addPositiveSizeBonus(50, 100);
-        levelBuilder.addPositiveSpeedBonus(200, 300);
-
-        Level level = levelBuilder.build();
+        // probably there should be an option to pass parameters to start level and adjust builder and level according to this
+        PositionStrategy strategy = new RectanglePositionStrategy(new StoneLevelBuilder(), levelFileReader.readFile(1));
+        Level level = strategy.arrangeObjects();
 
         frame.getContentPane().add(level);
 
