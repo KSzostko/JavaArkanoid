@@ -3,9 +3,9 @@ package com.company.decorators;
 import com.company.Ball;
 import com.company.Point;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.RectangularShape;
 
 public class BallDecorator extends Ball {
     protected Ball ball;
@@ -25,8 +25,8 @@ public class BallDecorator extends Ball {
     }
 
     @Override
-    public void collide() {
-        ball.collide();
+    public void collide(JComponent component) {
+        ball.collide(component);
     }
 
     @Override

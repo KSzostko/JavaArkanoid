@@ -1,10 +1,10 @@
-package states;
+package com.company.states;
 
 import com.company.Block;
 
-public class DestroyedState extends State
+public class HitState extends State
 {
-    public DestroyedState(Block block)
+    public HitState(Block block)
     {
         super(block);
     }

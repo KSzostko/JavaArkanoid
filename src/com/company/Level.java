@@ -5,19 +5,22 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.RectangularShape;
+import java.util.List;
+import java.util.Map;
 
 public class Level extends JPanel {
     private Platform platform;
     private Ball ball;
+    private int ballRadius = 20;
     private Point ballPoint = new Point(80, 300);
-    // later it will be list of bonuses
-    private Bonus bonus;
+    private List<Block> blocks;
+    private Map<Point, Bonus> bonuses;
 
-    public Level(Platform platform, Ball ball, Bonus bonus) {
+    public Level(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses) {
         this.platform = platform;
         this.ball = ball;
-        this.bonus = bonus;
+        this.blocks = blocks;
+        this.bonuses = bonuses;
 
         initLevel();
     }
@@ -49,13 +52,16 @@ public class Level extends JPanel {
             }
         });
 
+        startLevel();
+    }
+
+    private void startLevel() {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while(true) {
                     platform.tick();
                     ballPoint = ball.move(ballPoint);
-                    //System.out.println(ball.getBounds(ballPoint, 20).getX());
 
                     checkCollision();
 
@@ -72,14 +78,58 @@ public class Level extends JPanel {
             }
 
             private void checkCollision() {
-                Ellipse2D ballBounds = ball.getBounds(ballPoint, 20);
-                Rectangle bonusBounds = bonus.getBounds();
+                Ellipse2D ballBounds = ball.getBounds(ballPoint, ballRadius);
+                Rectangle platformBounds = platform.getBounds();
 
-                // later we will be checking whole lists
-                if(ballBounds.intersects(bonusBounds.getX(), bonusBounds.getY(), bonusBounds.getWidth(), bonusBounds.getHeight())) {
-                    System.out.println("Collision detected!");
-                    ball = bonus.addBonus(ball);
-                    // now should be method which will change ball speed vector somehow
+                // collision with the bonus
+                for (Map.Entry<Point, Bonus> entry : bonuses.entrySet()) {
+                    Point p = entry.getKey();
+                    Bonus bonus = entry.getValue();
+                    Rectangle bonusBounds = bonus.getBounds(p);
+
+                    if (ballBounds.intersects(bonusBounds.getX(), bonusBounds.getY(), bonusBounds.getWidth(), bonusBounds.getHeight())) {
+                        System.out.println("Collision detected!");
+                        ball = bonus.addBonus(ball);
+
+                        remove(bonus);
+                        bonuses.remove(p);
+                        revalidate();
+                        repaint();
+
+                        // probably only on bonus can be hit at the moment
+                        // so there's no need to check the others
+                        break;
+                    }
+                }
+
+                // ball below platform is game over
+                if(platformBounds.getY() - ballBounds.getHeight() < ballBounds.getY() - 3) {
+                    System.out.println("Game over!");
+                }
+
+                // platform was hit by ball
+                if(ballBounds.intersects(platformBounds.getX(), platformBounds.getY(), platformBounds.getWidth(), platformBounds.getHeight())) {
+                    ball.collide(ball);
+                }
+
+                for(Block block : blocks) {
+                    Rectangle blockBounds = block.getBounds();
+                    if(ballBounds.intersects(blockBounds.getX(), blockBounds.getY(), blockBounds.getWidth(), blockBounds.getHeight())
+                            && !block.isRemoved()) {
+                        block.hit();
+                        ball.collide(block);
+
+                        if(!block.hasEndurance()) {
+                            block.destroy();
+
+                            remove(block);
+                            revalidate();
+                            repaint();
+
+                            // same as with bonuses
+                            break;
+                        }
+                    }
                 }
             }
         }).start();
@@ -91,8 +141,20 @@ public class Level extends JPanel {
         super.paint(g2d);
 
         platform.draw(g2d);
-        bonus.draw(g2d);
-        // hardcoded radius needs to be changed
-        ball.draw(g2d, ballPoint, 20);
+
+        for (Map.Entry<Point, Bonus> entry : bonuses.entrySet()) {
+            Point p = entry.getKey();
+            Bonus bonus = entry.getValue();
+
+            bonus.draw(g2d, p);
+        }
+
+        for(Block block : blocks) {
+            if(!block.isRemoved()) {
+                block.draw(g2d);
+            }
+        }
+
+        ball.draw(g2d, ballPoint, ballRadius);
     }
 }

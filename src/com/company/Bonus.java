@@ -2,57 +2,33 @@ package com.company;
 
 import com.company.decorators.*;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.RectangularShape;
 
-public class Bonus {
-    private int width;
-    private int height;
-    private int x;
-    private int y;
+// this has to extend from JComponent because otherwise we can't remove it from JPanel
+public class Bonus extends JComponent {
+    public static final int WIDTH = 50;
+    public static final int HEIGHT = 30;
+
     private Image image;
     private Type type;
 
-    public Bonus(int width, int height, int x, int y, Image image, Type type) {
-        this.width = width;
-        this.height = height;
-        this.x = x;
-        this.y = y;
-        this.image = image;
+    public Bonus(Type type, String imagePath) {
         this.type = type;
+        this.image = ImgUtils.getImage(imagePath);
     }
 
     public Bonus() {
-        this.width = 20;
-        this.height = 20;
-        this.x = 50;
-        this.y = 200;
         this.image = ImgUtils.getImage("img/wood/container.jpg");
-        type = Type.SPEED_INCREASE;
+        type = Type.SPEED_DECREASE;
     }
 
-    public int getWidth() {
-        return width;
+    public void draw(Graphics2D g, Point p) {
+        g.drawImage(image, p.getX(), p.getY(), WIDTH, HEIGHT, null);
     }
 
-    public int getHeight() {
-        return height;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void draw(Graphics2D g) {
-        g.drawImage(image, x, y, width, height, null);
-    }
-
-    public Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
+    public Rectangle getBounds(Point p) {
+        return new Rectangle(p.getX(), p.getY(), WIDTH, HEIGHT);
     }
 
     public Ball addBonus(Ball ball) {

@@ -11,5 +11,7 @@ public class Main {
         //Ranking ranking = new Ranking();
         //ranking.addScore(new Score("Anon3", 200));
         //System.out.println(Arrays.toString(ranking.getScores().toArray(new Score[0])));
+        //LevelFileReader levelFileReader = LevelFileReader.getInstance();
+        //levelFileReader.readFile(1);
     }
 }

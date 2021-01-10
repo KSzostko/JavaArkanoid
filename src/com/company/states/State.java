@@ -1,4 +1,4 @@
-package states;
+package com.company.states;
 
 import com.company.Block;
 

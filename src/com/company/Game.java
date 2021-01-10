@@ -1,17 +1,19 @@
 package com.company;
 
 import com.company.commands.*;
-import com.company.decorators.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class Game {
+    public static final int FRAME_WIDTH = 600;
+    public static final int FRAME_HEIGHT = 500;
+
     private JFrame frame;
     private Ranking ranking;
-    //
     private LevelFileReader levelFileReader;
+    private PositionStrategy strategy;
 
     public Game() {
         // @TODO: add positionStrategy field
@@ -20,13 +22,17 @@ public class Game {
         initScreen();
     }
 
+    public void setStrategy(PositionStrategy strategy) {
+        this.strategy = strategy;
+    }
+
     public JFrame getFrame() {
         return frame;
     }
 
     private void initScreen() {
         frame = new JFrame("Arkanoid");
-        frame.setSize(600, 500);
+        frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.getContentPane().setBackground(Color.white);
         frame.setLayout(new FlowLayout());
         frame.addWindowListener(new WindowAdapter() {
@@ -109,8 +115,10 @@ public class Game {
     public void startLevel() {
         clearScreen();
 
-        // this is for platform movement test only
-        Level level = new Level(new Platform(), new Ball(), new Bonus());
+        // probably there should be an option to pass parameters to start level and adjust builder and level according to this
+        PositionStrategy strategy = new RectanglePositionStrategy(new StoneLevelBuilder(), levelFileReader.readFile(1));
+        Level level = strategy.arrangeObjects();
+
         frame.getContentPane().add(level);
 
         level.requestFocusInWindow();

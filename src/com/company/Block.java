@@ -1,14 +1,20 @@
 package com.company;
 
-import states.HealthyState;
-import states.State;
 
+
+
+import com.company.states.HealthyState;
+import com.company.states.State;
+//
+import javax.swing.*;
 import java.awt.*;
 
 
 // to tylko zarys bo jeszcze nie do końca ogarniam jak to ma wyglądać
-public class Block
-{
+public class Block extends JComponent {
+    public static final int WIDTH = 100;
+    public static final int HEIGHT = 30;
+
     private State state;
     //
     private int x;
@@ -16,24 +22,45 @@ public class Block
     private int endurance;
     //
     private Image img;
+    private boolean removed = false;
 
-    public Block(Image img, int x, int y, int endurance)
+    public Block(String imgPath, int x, int y, int endurance)
     {
         this.x = x;
         this.y = y;
         this.endurance = endurance;
         //
-        this.img = img;
-        //
+
         this.state = new HealthyState(this);
+        //
+        this.img = ImgUtils.getImage(imgPath);
 
     }
 
-    public void draw(Graphics2D g, Point p)
+    // just for object quick creation while testing
+    public Block() {
+        this.x = 50;
+        this.y = 190;
+        this.endurance = 2;
+        this.img = ImgUtils.getImage("img/wood/container.jpg");
+    }
+
+
+    public boolean isRemoved() {
+        return removed;
+    }
+
+    public boolean hasEndurance() {
+        return endurance > 0;
+    }
+
+    public void draw(Graphics2D g)
     {
-        // nie wiem czy to ma być położenie z klasy czy z punktu
-        //g.drawImage(img, x, y, null);
-        g.drawImage(img, p.getX(), p.getY(), null);
+        g.drawImage(img, x, y, WIDTH, HEIGHT, null);
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, WIDTH, HEIGHT);
     }
 
     public void setState(State state)
@@ -51,7 +78,13 @@ public class Block
         this.state.changeImage();
     }
 
-    // public void hit();
+    public void hit() {
+        endurance--;
+        // here will be some state change
+    }
 
-    // public void destroy();
+     public void destroy() {
+        // here will be more code of course
+        removed = true;
+     }
 }
