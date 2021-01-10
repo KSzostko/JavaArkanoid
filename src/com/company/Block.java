@@ -1,5 +1,6 @@
 package com.company;
 
+import states.HealthyState;
 import states.State;
 
 import java.awt.*;
@@ -23,6 +24,8 @@ public class Block
         this.endurance = endurance;
         //
         this.img = img;
+        //
+        this.state = new HealthyState(this);
 
     }
 

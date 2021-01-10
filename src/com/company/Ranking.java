@@ -26,7 +26,7 @@ public class Ranking
         BufferedReader br = null;
 
         try {
-            br = new BufferedReader(new FileReader("ranking/ranking.txt"));
+            br = new BufferedReader(new FileReader("JavaArkanoid\\ranking\\ranking.txt"));
 
             String fileLine, username = "";
             int points = -1, lineCount = 0;
@@ -62,7 +62,7 @@ public class Ranking
         BufferedWriter writer = null;
 
         try {
-            writer = new BufferedWriter(new FileWriter("ranking/ranking.txt"));
+            writer = new BufferedWriter(new FileWriter("JavaArkanoid\\ranking\\ranking.txt"));
 
             for(Score score : scores) {
                 writer.append(score.getUsername());
