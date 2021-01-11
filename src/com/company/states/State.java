@@ -2,6 +2,12 @@ package com.company.states;
 
 import com.company.Block;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
+import java.util.concurrent.TimeUnit;
+
 public abstract class State
 {
     public Block block;
@@ -15,7 +21,28 @@ public abstract class State
 
     public abstract void changeImage();
 
-    // test
+    // te 2 funkcje do sprawdzenia
     public abstract void changeState();
+
+    public class SoundThread implements Runnable
+    {
+        String filePath;
+        public SoundThread(String filePath) {this.filePath = filePath;}
+
+        @Override
+        public void run() {
+            try
+            {
+                File file = new File(filePath);
+                AudioInputStream audio = AudioSystem.getAudioInputStream(file);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audio);
+                clip.start();
+
+                TimeUnit.SECONDS.sleep(1);
+            }
+            catch (Exception e) { }
+        }
+    }
 
 }

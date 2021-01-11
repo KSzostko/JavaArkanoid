@@ -19,7 +19,7 @@ public class DestroyedState extends State
     @Override
     public void playSound()
     {
-        // próbowałem 4 różnych metod do pusczenia dzwięku, żadna nie działa
+        new Thread(new SoundThread("JavaArkanoid\\sounds\\destroyed.wav")).start();
     }
 
     @Override

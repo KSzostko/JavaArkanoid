@@ -16,7 +16,7 @@ public class HitState extends State
     @Override
     public void playSound()
     {
-        // próbowałem 4 różnych metod do pusczenia dzwięku, żadna nie działa
+        new Thread(new SoundThread("JavaArkanoid\\sounds\\hit.wav")).start();
     }
 
     @Override
