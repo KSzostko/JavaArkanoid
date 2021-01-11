@@ -1,8 +1,6 @@
 package com.company;
 
 
-
-
 import com.company.states.HealthyState;
 import com.company.states.State;
 //
@@ -10,8 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 
 
-// to tylko zarys bo jeszcze nie do końca ogarniam jak to ma wyglądać
-public class Block extends JComponent {
+public class Block extends JComponent
+{
     public static final int WIDTH = 100;
     public static final int HEIGHT = 30;
 
@@ -20,9 +18,10 @@ public class Block extends JComponent {
     private int x;
     private int y;
     private int endurance;
+    private boolean removed = false;
     //
     private Image img;
-    private boolean removed = false;
+
 
     public Block(String imgPath, int x, int y, int endurance)
     {
@@ -30,15 +29,14 @@ public class Block extends JComponent {
         this.y = y;
         this.endurance = endurance;
         //
-
         this.state = new HealthyState(this);
         //
         this.img = ImgUtils.getImage(imgPath);
-
     }
 
     // just for object quick creation while testing
-    public Block() {
+    public Block()
+    {
         this.x = 50;
         this.y = 190;
         this.endurance = 2;
@@ -46,45 +44,37 @@ public class Block extends JComponent {
     }
 
 
-    public boolean isRemoved() {
-        return removed;
-    }
+    public boolean isRemoved() { return removed; }
 
-    public boolean hasEndurance() {
-        return endurance > 0;
-    }
+    public boolean hasEndurance() { return endurance > 0; }
 
-    public void draw(Graphics2D g)
+    public void draw(Graphics2D g) { g.drawImage(img, x, y, WIDTH, HEIGHT, null); }
+
+    public Rectangle getBounds() { return new Rectangle(x, y, WIDTH, HEIGHT); }
+
+    public void setState(State state) { this.state = state; }
+
+    public void playSound() { this.state.playSound(); }
+
+    public void changeImage() { this.state.changeImage(); }
+    public void setImg(String imgPath) {this.img = ImgUtils.getImage(imgPath);}
+
+    public void hit()
     {
-        g.drawImage(img, x, y, WIDTH, HEIGHT, null);
-    }
+        //chyba tak to powinno wyglądac, zostawiam do oceny
+        playSound();
+        changeImage();
 
-    public Rectangle getBounds() {
-        return new Rectangle(x, y, WIDTH, HEIGHT);
-    }
-
-    public void setState(State state)
-    {
-        this.state = state;
-    }
-
-    public void changeSound()
-    {
-        this.state.changeSound();
-    }
-
-    public void changeImage()
-    {
-        this.state.changeImage();
-    }
-
-    public void hit() {
         endurance--;
-        // here will be some state change
+        if(endurance == 0)
+            destroy();
+        else
+            state.changeState();
     }
 
-     public void destroy() {
-        // here will be more code of course
-        removed = true;
+     public void destroy()
+     {
+         // here will be more code of course
+         removed = true;
      }
 }

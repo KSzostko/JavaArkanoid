@@ -4,15 +4,18 @@ import com.company.Block;
 
 public abstract class State
 {
-    private Block block;
+    public Block block;
 
     public State(Block block)
     {
         this.block = block;
     }
 
-    public abstract void changeSound();
+    public abstract void playSound();
 
     public abstract void changeImage();
+
+    // test
+    public abstract void changeState();
 
 }
