@@ -4,9 +4,11 @@ import com.company.Block;
 
 import javax.print.attribute.standard.Media;
 //
+import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 
 public class DestroyedState extends State
@@ -19,14 +21,14 @@ public class DestroyedState extends State
     @Override
     public void playSound()
     {
-        new Thread(new SoundThread("JavaArkanoid\\sounds\\destroyed.wav")).start();
+        new Thread(new SoundThread("sounds/destroyed.wav")).start();
     }
 
     @Override
     public void changeImage()
     {
         // jak już będziemy mieli grafikę to się ustawi odpowiednią
-        String imagePath = "JavaArkanoid\\img\\wood\\container.jpg";
+        String imagePath = "img/wood/hit.jpg";
 
         block.setImg(imagePath);
     }
@@ -36,4 +38,5 @@ public class DestroyedState extends State
         ;
         //ostatni stan wiec nia nic sie nie zmienia
     }
+
 }

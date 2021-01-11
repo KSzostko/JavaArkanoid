@@ -24,6 +24,8 @@ public abstract class State
     // te 2 funkcje do sprawdzenia
     public abstract void changeState();
 
+
+
     public class SoundThread implements Runnable
     {
         String filePath;
@@ -44,5 +46,4 @@ public abstract class State
             catch (Exception e) { }
         }
     }
-
 }

@@ -35,6 +35,7 @@ public class Block extends JComponent
     }
 
     // just for object quick creation while testing
+   /*
     public Block()
     {
         this.x = 50;
@@ -42,7 +43,7 @@ public class Block extends JComponent
         this.endurance = 2;
         this.img = ImgUtils.getImage("img/wood/container.jpg");
     }
-
+    */
 
     public boolean isRemoved() { return removed; }
 
@@ -64,12 +65,11 @@ public class Block extends JComponent
         //chyba tak to powinno wyglądac, zostawiam do oceny
         playSound();
         changeImage();
+        state.changeState();
 
         endurance--;
         if(endurance == 0)
             destroy();
-        else
-            state.changeState();
     }
 
      public void destroy()
