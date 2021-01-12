@@ -26,7 +26,7 @@ public class Ranking
         BufferedReader br = null;
 
         try {
-            br = new BufferedReader(new FileReader("JavaArkanoid\\ranking\\ranking.txt"));
+            br = new BufferedReader(new FileReader("ranking\\ranking.txt"));
 
             String fileLine, username = "";
             int points = -1, lineCount = 0;
