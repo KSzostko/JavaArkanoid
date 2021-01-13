@@ -31,7 +31,9 @@ public class AlmostDestroyedState extends State
     }
 
     @Override
-    public void changeState() {
-        block.setState(new DestroyedState(block));
+    public void changeState()
+    {
+        if (!this.block.hasEndurance())
+            block.setState(new DestroyedState(block));
     }
 }
