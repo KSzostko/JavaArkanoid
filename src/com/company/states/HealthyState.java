@@ -15,24 +15,29 @@ public class HealthyState extends State
         super(block);
     }
 
+    // healthy state nie ma dzwięku i zmiany obrazka bo jest startowy
     @Override
     public void playSound()
     {
-        new Thread(new SoundThread("sounds/hit.wav")).start();
+        //new Thread(new SoundThread("sounds/hit.wav")).start();
     }
 
     @Override
     public void changeImage()
     {
         // jak już będziemy mieli grafikę to się ustawi odpowiednią
-        String imagePath = "img/wood/hit.jpg";
+        //String imagePath = "img/wood/hit.jpg";
 
-        block.setImg(imagePath);
+        //block.setImg(imagePath);
     }
 
     @Override
-    public void changeState() {
-        block.setState(new HitState(block));
+    public void changeState()
+    {
+        if(this.block.hasEndurance())
+            block.setState(new HitState(block));
+        else
+            block.setState(new DestroyedState(block));
     }
 
 }

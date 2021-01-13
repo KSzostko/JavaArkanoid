@@ -62,12 +62,16 @@ public class Block extends JComponent
 
     public void hit()
     {
-        //chyba tak to powinno wyglądac, zostawiam do oceny
+        // zmiejszenie wytrzymałosci
+        endurance--;
+
+        // zmiana stanu na kolejny(block jest coraz bardziej obity)
+        state.changeState();
+        // zmiana wyglądu i puszczenie dzwięku z nowego stanu
         playSound();
         changeImage();
-        state.changeState();
 
-        endurance--;
+        // zniszczenie block-a
         if(endurance == 0)
             destroy();
     }

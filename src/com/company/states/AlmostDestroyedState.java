@@ -25,7 +25,7 @@ public class AlmostDestroyedState extends State
     public void changeImage()
     {
         // jak już będziemy mieli grafikę to się ustawi odpowiednią
-        String imagePath = "img/wood/hit.jpg";
+        String imagePath = "img/wood/almost_destroyed.jpg";
 
         block.setImg(imagePath);
     }
@@ -33,26 +33,5 @@ public class AlmostDestroyedState extends State
     @Override
     public void changeState() {
         block.setState(new DestroyedState(block));
-    }
-
-    public class SoundThread implements Runnable
-    {
-        String filePath;
-        public SoundThread(String filePath) {this.filePath = filePath;}
-
-        @Override
-        public void run() {
-            try
-            {
-                File file = new File(filePath);
-                AudioInputStream audio = AudioSystem.getAudioInputStream(file);
-                Clip clip = AudioSystem.getClip();
-                clip.open(audio);
-                clip.start();
-
-                TimeUnit.SECONDS.sleep(1);
-            }
-            catch (Exception e) { }
-        }
     }
 }

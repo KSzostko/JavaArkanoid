@@ -31,8 +31,12 @@ public class HitState extends State
     }
 
     @Override
-    public void changeState() {
-        block.setState(new AlmostDestroyedState(block));
+    public void changeState()
+    {
+        if(this.block.hasEndurance())
+            block.setState(new AlmostDestroyedState(block));
+        else
+            block.setState(new DestroyedState(block));
     }
 
 }

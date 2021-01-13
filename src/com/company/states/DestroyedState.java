@@ -28,7 +28,7 @@ public class DestroyedState extends State
     public void changeImage()
     {
         // jak już będziemy mieli grafikę to się ustawi odpowiednią
-        String imagePath = "img/wood/hit.jpg";
+        String imagePath = "img/wood/destroyed.jpg";
 
         block.setImg(imagePath);
     }
