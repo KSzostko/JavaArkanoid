@@ -4,30 +4,12 @@ import java.util.Map;
 import java.util.Random;
 
 public class RectanglePositionStrategy extends PositionStrategy {
-    private int currentX;
-    private int currentY;
-
     public RectanglePositionStrategy(LevelBuilder builder, Map<String, Integer> blocksCount) {
         super(builder, blocksCount);
-        currentX = 0;
-        currentY = 0;
     }
 
     @Override
     public Level arrangeObjects() {
-        String[] blockTypes = new String[blocksCount.size()];
-        int[] currentCount = new int[blocksCount.size()];
-
-        int i = 0;
-        int totalBlocks = 0;
-        for(Map.Entry<String, Integer> entry : blocksCount.entrySet()) {
-            blockTypes[i] = entry.getKey();
-            currentCount[i] = entry.getValue();
-
-            i++;
-            totalBlocks += entry.getValue();
-        }
-
         Random random = new Random();
         int nextBlock = random.nextInt(blockTypes.length);
 
