@@ -6,13 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class LevelBuilder {
+    private Game game;
     protected Platform platform;
     protected Ball ball;
     protected List<Block> blocks = new ArrayList<>();
     protected Map<Point, Bonus> bonuses = new HashMap<>();
-    // not sure whether we cann pass parameters to builder
-    // this is need for level gameover
-    private Game game;
 
     public LevelBuilder(Game game) {
         this.game = game;

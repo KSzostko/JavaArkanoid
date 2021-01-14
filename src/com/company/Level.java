@@ -114,8 +114,9 @@ public class Level extends JPanel {
                     gameover = true;
                     game.clearScreen();
 
-                    // instead of start view there will be some view with final result
-                    game.displayStartView();
+                    // proper score will be calculated with the help of iterator
+                    Score score = new Score("Anon", 12);
+                    game.displayLevelEndView(score);
                 }
 
                 // platform was hit by ball

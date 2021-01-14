@@ -166,6 +166,33 @@ public class Game {
         frame.setVisible(true);
     }
 
+    public void displayLevelEndView(Score score) {
+//        ranking.addScore(score);
+
+        clearScreen();
+        frame.setLayout(new BorderLayout(20, 60));
+
+        JLabel headerLabel = new JLabel("",JLabel.CENTER);
+
+        JPanel controlPanel = new JPanel();
+        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
+        controlPanel.setBackground(Color.WHITE);
+
+        frame.add(headerLabel, BorderLayout.PAGE_START);
+        frame.add(controlPanel, BorderLayout.CENTER);
+        frame.setVisible(true);
+
+        String congratsString = "<html>Congratulations " + score.getUsername() + "!<br/>" +
+                "You scored " + score.getPoints() + " points!<html/>";
+        headerLabel.setText(congratsString);
+        headerLabel.setFont(new Font("Lato", Font.BOLD, 20));
+        addMargin(headerLabel, 50, 10, 10, 10);
+
+        addNavButtons(controlPanel, true);
+
+        frame.setVisible(true);
+    }
+
     private void executeCommand(Command command) {
         command.execute();
     }
