@@ -3,8 +3,12 @@ package com.company;
 import com.company.commands.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.regex.Pattern;
 
 public class Game {
     public static final int FRAME_WIDTH = 600;
@@ -14,11 +18,13 @@ public class Game {
     private Ranking ranking;
     private LevelFileReader levelFileReader;
     private PositionStrategy strategy;
+    private String username;
 
     public Game() {
         // @TODO: add positionStrategy field
         ranking = new Ranking();
         levelFileReader = LevelFileReader.getInstance();
+        username = "";
         initScreen();
     }
 
@@ -42,7 +48,42 @@ public class Game {
             }
         });
 
-        displayStartView();
+        enterName();
+    }
+
+    private void enterName() {
+        frame.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
+
+        JLabel inputLabel = new JLabel("Enter your name:", JLabel.LEFT);
+        addMargin(inputLabel, 0, 150, 0, 0);
+        inputLabel.setPreferredSize(new Dimension(600, 20));
+        inputLabel.setFont(new Font("Lato", Font.BOLD, 15));
+
+        JTextField textField = new JTextField();
+        textField.setPreferredSize(new Dimension(300, 30));
+
+        JButton submitButton = new JButton("Submit");
+        submitButton.setPreferredSize(new Dimension(300, 30));
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String inputText = textField.getText();
+                if(Pattern.matches("[a-zA-Z]+[0-9]*", inputText)) {
+                    username = inputText;
+                    displayStartView();
+                } else {
+                    displayDialog("Username must contain at least one letter and optionally numbers");
+                    textField.setText("");
+                }
+            }
+        });
+
+        frame.add(inputLabel);
+        frame.add(textField);
+        frame.add(submitButton);
+
+        frame.setVisible(true);
     }
 
     public void displayStartView() {
@@ -205,5 +246,35 @@ public class Game {
 
         panel.add(exitButton);
         panel.add(Box.createVerticalStrut(20));
+    }
+
+    private void addMargin(JComponent cmp, int top, int left, int bottom, int right) {
+        Border border = cmp.getBorder();
+        Border margin = new EmptyBorder(top, left, bottom, right);
+        cmp.setBorder(new CompoundBorder(border, margin));
+    }
+
+    private void displayDialog(String message) {
+        JDialog dialog = new JDialog(frame, "Info", true);
+        dialog.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
+
+        JLabel label = new JLabel(message, JLabel.CENTER);
+
+        label.setPreferredSize(new Dimension(400, 40));
+
+        JButton okButton = new JButton("Ok");
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialog.setVisible(false);
+            }
+        });
+
+        dialog.add(label);
+        dialog.add(okButton);
+
+        dialog.setSize(400, 180);
+        dialog.setLocationRelativeTo(frame);
+        dialog.setVisible(true);
     }
 }
