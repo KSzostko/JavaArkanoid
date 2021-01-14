@@ -116,7 +116,7 @@ public class Game {
         clearScreen();
 
         // probably there should be an option to pass parameters to start level and adjust builder and level according to this
-        PositionStrategy strategy = new RectanglePositionStrategy(new StoneLevelBuilder(), levelFileReader.readFile(1));
+        PositionStrategy strategy = new RectanglePositionStrategy(new StoneLevelBuilder(this), levelFileReader.readFile(1));
         Level level = strategy.arrangeObjects();
 
         frame.getContentPane().add(level);
@@ -129,7 +129,7 @@ public class Game {
         command.execute();
     }
 
-    private void clearScreen() {
+    public void clearScreen() {
         frame.getContentPane().removeAll();
         frame.validate();
         frame.repaint();

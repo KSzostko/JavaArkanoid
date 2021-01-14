@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Level extends JPanel {
+    private Game game;
     private Platform platform;
     private Ball ball;
     private int ballRadius = 20;
@@ -16,13 +17,16 @@ public class Level extends JPanel {
     private List<Block> blocks;
     private Map<Point, Bonus> bonuses;
 
-    public Level(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses) {
+
+    public Level(Game game, Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses) {
+        this.game = game;
         this.platform = platform;
         this.ball = ball;
         this.blocks = blocks;
         this.bonuses = bonuses;
 
         initLevel();
+
     }
 
     private void initLevel() {
@@ -57,9 +61,11 @@ public class Level extends JPanel {
 
     private void startLevel() {
         new Thread(new Runnable() {
+            private volatile boolean gameover = false;
+
             @Override
             public void run() {
-                while(true) {
+                while(!gameover) {
                     platform.tick();
                     ballPoint = ball.move(ballPoint);
 
@@ -105,6 +111,11 @@ public class Level extends JPanel {
                 // ball below platform is game over
                 if(platformBounds.getY() - ballBounds.getHeight() < ballBounds.getY() - 3) {
                     System.out.println("Game over!");
+                    gameover = true;
+                    game.clearScreen();
+
+                    // instead of start view there will be some view with final result
+                    game.displayStartView();
                 }
 
                 // platform was hit by ball
