@@ -338,4 +338,28 @@ public class Game {
         dialog.setLocationRelativeTo(frame);
         dialog.setVisible(true);
     }
+    //
+    public List<LevelSnapshot> history;
+
+    public void undo(){
+        // Check if there is any previous state to return to
+        if(!history.isEmpty()) {
+            clearScreen();
+
+            // Take most recent level snapshot
+            LevelSnapshot levelSS = history.get(history.size());
+            // Remove it from list
+            history.remove(history.size());
+            // Create level with data from recent snapshot
+            Level level = levelSS.getState();
+
+            frame.getContentPane().add(level);
+
+            level.requestFocusInWindow();
+            frame.setVisible(true);
+        }
+    }
+    public void resetHistory(){
+        history.clear();
+    }
 }
