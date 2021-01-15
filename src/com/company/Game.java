@@ -155,12 +155,16 @@ public class Game {
 
     public void startLevel() {
         clearScreen();
+        frame.setLayout(new BorderLayout());
+
+        JMenuBar menuBar = addMenuBar();
+        frame.add(menuBar, BorderLayout.PAGE_START);
 
         // probably there should be an option to pass parameters to start level and adjust builder and level according to this
         PositionStrategy strategy = new RectanglePositionStrategy(new StoneLevelBuilder(this), levelFileReader.readFile(1));
         Level level = strategy.arrangeObjects();
 
-        frame.getContentPane().add(level);
+        frame.getContentPane().add(level, BorderLayout.CENTER);
 
         level.requestFocusInWindow();
         frame.setVisible(true);
@@ -279,6 +283,35 @@ public class Game {
         Border border = cmp.getBorder();
         Border margin = new EmptyBorder(top, left, bottom, right);
         cmp.setBorder(new CompoundBorder(border, margin));
+    }
+
+    private JMenuBar addMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu menu = new JMenu("Revert");
+
+        JMenuItem prevItem = new JMenuItem("Prev");
+        prevItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // prev saved snapshot
+            }
+        });
+
+        JMenuItem randomItem = new JMenuItem("Random");
+        randomItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // random saved snapshot
+            }
+        });
+
+        menu.add(prevItem);
+        menu.add(randomItem);
+
+        menuBar.add(menu);
+
+        return menuBar;
     }
 
     private void displayDialog(String message) {
