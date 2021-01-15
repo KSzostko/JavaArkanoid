@@ -11,7 +11,7 @@ import java.awt.event.*;
 import java.util.regex.Pattern;
 
 public class Game {
-    public static final int FRAME_WIDTH = 600;
+    public static final int FRAME_WIDTH = 1000;
     public static final int FRAME_HEIGHT = 500;
 
     private JFrame frame;

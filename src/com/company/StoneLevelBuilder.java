@@ -8,7 +8,7 @@ public class StoneLevelBuilder extends LevelBuilder {
 
     @Override
     public void addStrongBlock(int x, int y) {
-        Block block = new Block("img/wood/container.jpg", x, y, 100000);
+        Block block = new Block("img/wood/container.jpg", x, y, 4);
         blocks.add(block);
     }
 
@@ -55,6 +55,6 @@ public class StoneLevelBuilder extends LevelBuilder {
 
     @Override
     public void addPlatform(int x, int y) {
-        platform = new Platform(x, y, 585, 10, "img/wood/container.jpg");
+        platform = new Platform(x, y, Game.FRAME_WIDTH, 10, "img/wood/container.jpg");
     }
 }

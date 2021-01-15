@@ -33,7 +33,7 @@ public class RectanglePositionStrategy extends PositionStrategy {
         }
 
         builder.addBall(new Speed(-3, -3));
-        builder.addPlatform(300 - 100 / 2, 400);
+        builder.addPlatform(300 - 100 / 2, Game.FRAME_HEIGHT - 100);
 
         return builder.build();
     }
