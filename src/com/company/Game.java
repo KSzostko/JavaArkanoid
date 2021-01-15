@@ -55,15 +55,15 @@ public class Game {
         frame.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
 
         JLabel inputLabel = new JLabel("Enter your name:", JLabel.LEFT);
-        addMargin(inputLabel, 0, 150, 0, 0);
-        inputLabel.setPreferredSize(new Dimension(600, 20));
+        addMargin(inputLabel, 0, FRAME_WIDTH / 4, 0, 0);
+        inputLabel.setPreferredSize(new Dimension(FRAME_WIDTH, 20));
         inputLabel.setFont(new Font("Lato", Font.BOLD, 15));
 
         JTextField textField = new JTextField();
-        textField.setPreferredSize(new Dimension(300, 30));
+        textField.setPreferredSize(new Dimension(FRAME_WIDTH / 2, 30));
 
         JButton submitButton = new JButton("Submit");
-        submitButton.setPreferredSize(new Dimension(300, 30));
+        submitButton.setPreferredSize(new Dimension(FRAME_WIDTH / 2, 30));
 
         submitButton.addActionListener(new ActionListener() {
             @Override
