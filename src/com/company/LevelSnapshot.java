@@ -4,6 +4,62 @@ import java.util.List;
 import java.util.Map;
 
 public class LevelSnapshot {
+    public Game getG() {
+        return g;
+    }
+
+    public void setG(Game g) {
+        this.g = g;
+    }
+
+    public Platform getP() {
+        return p;
+    }
+
+    public void setP(Platform p) {
+        this.p = p;
+    }
+
+    public Ball getB() {
+        return b;
+    }
+
+    public void setB(Ball b) {
+        this.b = b;
+    }
+
+    public int getBallR() {
+        return ballR;
+    }
+
+    public void setBallR(int ballR) {
+        this.ballR = ballR;
+    }
+
+    public Point getBallP() {
+        return ballP;
+    }
+
+    public void setBallP(Point ballP) {
+        this.ballP = ballP;
+    }
+
+    public List<Block> getBlo() {
+        return blo;
+    }
+
+    public void setBlo(List<Block> blo) {
+        this.blo = blo;
+    }
+
+    public Map<Point, Bonus> getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(Map<Point, Bonus> bonus) {
+        this.bonus = bonus;
+    }
+
     private Game g;
     private Platform p;
     private Ball b;

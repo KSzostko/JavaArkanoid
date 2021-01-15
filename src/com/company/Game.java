@@ -20,6 +20,7 @@ public class Game {
     private LevelFileReader levelFileReader;
     private PositionStrategy strategy;
     private String username;
+    private Level level;
 
     public Game() {
         // @TODO: add positionStrategy field
@@ -163,7 +164,7 @@ public class Game {
 
         // probably there should be an option to pass parameters to start level and adjust builder and level according to this
         PositionStrategy strategy = new RowsPositionStrategy(new StoneLevelBuilder(this), levelFileReader.readFile(1));
-        Level level = strategy.arrangeObjects();
+        level = strategy.arrangeObjects();
 
         frame.getContentPane().add(level, BorderLayout.CENTER);
 
@@ -350,8 +351,8 @@ public class Game {
             LevelSnapshot levelSS = history.get(history.size());
             // Remove it from list
             history.remove(history.size());
-            // Create level with data from recent snapshot
-            Level level = levelSS.getState();
+            // Update level with old data from snap shot
+            level.restore(levelSS);
 
             frame.getContentPane().add(level);
 

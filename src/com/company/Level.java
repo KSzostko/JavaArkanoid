@@ -181,6 +181,13 @@ public class Level extends JPanel {
         return new LevelSnapshot(game,platform,ball,blocks,bonuses,ballRadius,ballPoint);
     }
     public void restore(LevelSnapshot levelSnapshot){
+        this.game = levelSnapshot.getG();
+        this.platform = levelSnapshot.getP();
+        this.ball = levelSnapshot.getB();
+        this.ballPoint = levelSnapshot.getBallP();
+        this.ballRadius = levelSnapshot.getBallR();
+        this.blocks = levelSnapshot.getBlo();
+        this.bonuses = levelSnapshot.getBonus();
 
     }
     public void calculatePoints(){
