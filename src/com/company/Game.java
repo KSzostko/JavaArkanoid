@@ -8,6 +8,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -170,6 +171,7 @@ public class Game {
 
         level.requestFocusInWindow();
         frame.setVisible(true);
+
     }
 
     public void displayLevelEndView(Score score) {
@@ -297,6 +299,7 @@ public class Game {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // prev saved snapshot
+                undo();
             }
         });
 
@@ -305,6 +308,9 @@ public class Game {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // random saved snapshot
+                // test adding levelsnapshots to history
+                history.add(level.save());
+                System.out.println(history.size());
             }
         });
 
@@ -340,21 +346,37 @@ public class Game {
         dialog.setVisible(true);
     }
     //
-    public List<LevelSnapshot> history;
+    public List<LevelSnapshot> history = new ArrayList<>();
 
     public void undo(){
         // Check if there is any previous state to return to
         if(!history.isEmpty()) {
+
+
+
+
+
             clearScreen();
+            frame.setLayout(new BorderLayout());
+
+            JMenuBar menuBar = addMenuBar();
+            frame.add(menuBar, BorderLayout.PAGE_START);
 
             // Take most recent level snapshot
-            LevelSnapshot levelSS = history.get(history.size());
+            LevelSnapshot levelSS = history.get(history.size()-1);
+            System.out.println(levelSS.getP().getX());
             // Remove it from list
-            history.remove(history.size());
+            history.remove(history.size()-1);
+
+            // Some testing code to check if it will refresh view in correct manner
+            levelSS.setBallR(100);
+            levelSS.setBallP(new Point(100,200));
+            //levelSS.setP(new Platform());
+
             // Update level with old data from snap shot
             level.restore(levelSS);
 
-            frame.getContentPane().add(level);
+            frame.getContentPane().add(level, BorderLayout.CENTER);
 
             level.requestFocusInWindow();
             frame.setVisible(true);

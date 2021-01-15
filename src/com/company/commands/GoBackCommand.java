@@ -10,5 +10,6 @@ public class GoBackCommand extends Command {
     @Override
     public void execute() {
         game.displayStartView();
+
     }
 }

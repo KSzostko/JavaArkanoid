@@ -17,13 +17,14 @@ public class Level extends JPanel {
     private List<Block> blocks;
     private Map<Point, Bonus> bonuses;
 
-    public Level(Game game, Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses,int br,Point bp) {
-        this.game = game;
+    // New constructor to aid getState func in levelSnapshot class
+    public Level(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses,int br,Point bp) {
         this.platform = platform;
         this.ball = ball;
         this.blocks = blocks;
         this.bonuses = bonuses;
-
+        this.ballRadius = br;
+        this.ballPoint = bp;
         initLevel();
 
     }
@@ -76,7 +77,8 @@ public class Level extends JPanel {
             public void run() {
                 while(!gameover) {
                     platform.tick();
-                    ballPoint = ball.move(ballPoint);
+                    // ball movement
+                    // ballPoint = ball.move(ballPoint);
 
                     checkCollision();
 
@@ -177,11 +179,12 @@ public class Level extends JPanel {
         ball.draw(g2d, ballPoint, ballRadius);
     }
     //
+    // Returns current state of level in form of a snapshot
     public LevelSnapshot save(){
-        return new LevelSnapshot(game,platform,ball,blocks,bonuses,ballRadius,ballPoint);
+        return new LevelSnapshot(platform,ball,blocks,bonuses,ballRadius,ballPoint);
     }
+    // Takes snap shot objects and changes current state of level to match snapshot's data
     public void restore(LevelSnapshot levelSnapshot){
-        this.game = levelSnapshot.getG();
         this.platform = levelSnapshot.getP();
         this.ball = levelSnapshot.getB();
         this.ballPoint = levelSnapshot.getBallP();
@@ -190,6 +193,7 @@ public class Level extends JPanel {
         this.bonuses = levelSnapshot.getBonus();
 
     }
+    // Calculate points usign destroyed blocks etc..
     public void calculatePoints(){
 
     }

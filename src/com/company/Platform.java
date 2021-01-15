@@ -7,11 +7,39 @@ public class Platform extends JComponent {
     public static final int WIDTH = 100;
     public static final int HEIGHT = 20;
 
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+    public int getLevelWidth() {
+        return levelWidth;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public int getMoving() {
+        return moving;
+    }
+
+    public int getSensitivity() {
+        return sensitivity;
+    }
+    //
     private int x;
     private int y;
     private int levelWidth;
     private Image image;
     private int moving = 0;
+
+
+
     private final int sensitivity;
 
     public Platform(int x, int y, int levelWidth, int sensitivity, String file) {
@@ -21,6 +49,7 @@ public class Platform extends JComponent {
         this.sensitivity = Math.abs(sensitivity);
         image = ImgUtils.getImage(file);
     }
+
 
     public Platform() {
         x = 300 - 100 / 2;
