@@ -8,6 +8,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Game {
@@ -336,5 +337,29 @@ public class Game {
         dialog.setSize(400, 180);
         dialog.setLocationRelativeTo(frame);
         dialog.setVisible(true);
+    }
+    //
+    public List<LevelSnapshot> history;
+
+    public void undo(){
+        // Check if there is any previous state to return to
+        if(!history.isEmpty()) {
+            clearScreen();
+
+            // Take most recent level snapshot
+            LevelSnapshot levelSS = history.get(history.size());
+            // Remove it from list
+            history.remove(history.size());
+            // Create level with data from recent snapshot
+            Level level = levelSS.getState();
+
+            frame.getContentPane().add(level);
+
+            level.requestFocusInWindow();
+            frame.setVisible(true);
+        }
+    }
+    public void resetHistory(){
+        history.clear();
     }
 }
