@@ -8,6 +8,11 @@ import java.util.Random;
 public class Ball extends JComponent {
     // @TODO: add ball image
     private Image img;
+
+    public Speed getSpeed() {
+        return speed;
+    }
+
     private Speed speed;
     private int levelWidth = Game.FRAME_WIDTH - 20;
 

@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,10 +65,12 @@ public class LevelSnapshot {
 
     public LevelSnapshot(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses,int br,Point bp) {
         this.p = new Platform(platform.getX(),platform.getY(),platform.getLevelWidth(),platform.getSensitivity(),"img/wood/container.jpg");
-        this.b = ball;
-        this.blo = blocks;
-        this.bonus = bonuses;
-        this.ballP = bp;
+        this.b = new Ball(ball.getSpeed());
+        this.blo = new ArrayList(blocks);
+        Map<Point, Bonus> new_map = new HashMap<>();
+        new_map.putAll(bonuses);
+        this.bonus = new_map;
+        this.ballP = new Point(bp.getX(),bp.getY());
         this.ballR = br;
     }
 

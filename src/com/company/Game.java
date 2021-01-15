@@ -367,12 +367,6 @@ public class Game {
             System.out.println(levelSS.getP().getX());
             // Remove it from list
             history.remove(history.size()-1);
-
-            // Some testing code to check if it will refresh view in correct manner
-            levelSS.setBallR(100);
-            levelSS.setBallP(new Point(100,200));
-            //levelSS.setP(new Platform());
-
             // Update level with old data from snap shot
             level.restore(levelSS);
 

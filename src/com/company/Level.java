@@ -78,7 +78,7 @@ public class Level extends JPanel {
                 while(!gameover) {
                     platform.tick();
                     // ball movement
-                    // ballPoint = ball.move(ballPoint);
+                    ballPoint = ball.move(ballPoint);
 
                     checkCollision();
 
