@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 public class Game {
@@ -299,7 +300,7 @@ public class Game {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // prev saved snapshot
-                undo();
+                undo(false);
             }
         });
 
@@ -308,9 +309,9 @@ public class Game {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // random saved snapshot
-                // test adding levelsnapshots to history
-                history.add(level.save());
-                System.out.println(history.size());
+                undo(true);
+
+
             }
         });
 
@@ -348,13 +349,9 @@ public class Game {
     //
     public List<LevelSnapshot> history = new ArrayList<>();
 
-    public void undo(){
+    public void undo(Boolean useRandom){
         // Check if there is any previous state to return to
         if(!history.isEmpty()) {
-
-
-
-
 
             clearScreen();
             frame.setLayout(new BorderLayout());
@@ -362,11 +359,24 @@ public class Game {
             JMenuBar menuBar = addMenuBar();
             frame.add(menuBar, BorderLayout.PAGE_START);
 
-            // Take most recent level snapshot
-            LevelSnapshot levelSS = history.get(history.size()-1);
-            System.out.println(levelSS.getP().getX());
-            // Remove it from list
-            history.remove(history.size()-1);
+            // depending on useRandom property determien whether to use last save or random one
+            LevelSnapshot levelSS;
+            if(useRandom == true){
+                Random random = new Random();
+                int randomInt = random.nextInt(history.size());
+                // Take random level snapshot within bounds
+                levelSS = history.get(randomInt);
+                // Remove it from list
+                history.remove(randomInt);
+            }else{
+                // Take most recent level snapshot
+                levelSS = history.get(history.size()-1);
+                // Remove it from list
+                history.remove(history.size()-1);
+            }
+
+
+
             // Update level with old data from snap shot
             level.restore(levelSS);
 

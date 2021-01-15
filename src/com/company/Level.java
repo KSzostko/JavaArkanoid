@@ -73,6 +73,8 @@ public class Level extends JPanel {
         new Thread(new Runnable() {
             private volatile boolean gameover = false;
 
+            private int countdownToFifteen = 0;
+
             @Override
             public void run() {
                 while(!gameover) {
@@ -84,6 +86,13 @@ public class Level extends JPanel {
 
                     repaint();
                     Thread.yield();
+
+                    // memento
+                    // currently set to save every 3 seconds
+                    countdownToFifteen += 10;
+                    if(countdownToFifteen == 3*1000){
+                        game.history.add(save());
+                    }
 
                     try {
                         Thread.sleep(10);
