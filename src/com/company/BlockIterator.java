@@ -21,6 +21,7 @@ public class BlockIterator {
         }
     }
     public void reset(){
+        currentElement = 0;
         destroyedBlocks.getBlocks().clear();
     }
 
