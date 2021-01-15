@@ -63,22 +63,35 @@ public class LevelSnapshot {
     private Point ballP = new Point(80, 300);
     private List<Block> blo;
     private Map<Point, Bonus> bonus;
-    private List<Block> destroyedBlocks;
+    private DestroyedBlocks destroyedBlocks;
     // Constructor of levelsnapshot, it takes data from already existing level and stores in this class for later usage
     // objects must be inicialized with new keyword because for ex. this.p = platform is only reference passing and it wont do
-    public LevelSnapshot(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses,int br,Point bp,List<Block> destroyedBlocks) {
+    public LevelSnapshot(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses,int br,Point bp,DestroyedBlocks destroyedBlocks) {
         this.p = new Platform(platform.getX(),platform.getY(),platform.getLevelWidth(),platform.getSensitivity(),"img/wood/container.jpg");
         this.b = new Ball(ball.getSpeed());
-        this.blo = new ArrayList(blocks);
+
+        // this.blo = new ArrayList<>(blocks);
+        List<Block> new_blocklist = new ArrayList<>();
+        for(int   i = 0; i<blocks.size() ;i++){
+            new_blocklist.add(new Block(blocks.get(i)));
+        }
+
+        this.blo = new_blocklist;
         Map<Point, Bonus> new_map = new HashMap<>();
-        new_map.putAll(bonuses);
+
+
+        for (Map.Entry<Point, Bonus> entry : bonuses.entrySet()) {
+            Point p = entry.getKey();
+            Bonus bonus = entry.getValue();
+            new_map.put(p,bonus);
+        }
         this.bonus = new_map;
         this.ballP = new Point(bp.getX(),bp.getY());
         this.ballR = br;
         //this.destroyedBlocks = new ArrayList(destroyedBlocks);
     }
     // return level object inicialized with past level attributes that were stored inside this class
-    public Level getState(){
+   /* public Level getState(){
         return new Level(p, b, blo, bonus,ballR,ballP,destroyedBlocks);
-    }
+    }*/
 }

@@ -23,6 +23,15 @@ public class Block extends JComponent
     private Image img;
 
 
+    public Block(Block b){
+        this.state = b.state;
+        this.x = b.x;
+        this.y = b.y;
+        this.endurance = b.endurance;
+        this.img = b.img;
+        this.removed = b.removed;
+    }
+
     public Block(String imgPath, int x, int y, int endurance)
     {
         this.x = x;

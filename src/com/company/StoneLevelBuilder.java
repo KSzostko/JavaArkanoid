@@ -38,7 +38,7 @@ public class  StoneLevelBuilder extends LevelBuilder {
 
     @Override
     public void addPositiveSizeBonus(int x, int y) {
-        Bonus bonus = BonusFactory.getBonus(Bonus.Type.SIZE_INCREASE, "img/wood/hit.jpg");
+        Bonus bonus = BonusFactory.getBonus(Bonus.Type.SIZE_INCREASE, "img/wood/container.jpg");
         bonuses.put(new Point(x, y), bonus);
     }
 

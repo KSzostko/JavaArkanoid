@@ -14,11 +14,16 @@ public class Level extends JPanel {
     private Ball ball;
     private int ballRadius = 20;
     private Point ballPoint = new Point(80, 300);
+
+    public List<Block> getBlocks() {
+        return blocks;
+    }
+
     private List<Block> blocks;
     private Map<Point, Bonus> bonuses;
-    private List<Block> destroyedBlocks;
+    private DestroyedBlocks destroyedBlocks = new DestroyedBlocks();
     // New constructor to aid getState func in levelSnapshot class
-    public Level(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses,int br,Point bp,List<Block> destroyedBlocks) {
+    public Level(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses,int br,Point bp,DestroyedBlocks destroyedBlocks) {
         this.platform = platform;
         this.ball = ball;
         this.blocks = blocks;
@@ -89,22 +94,24 @@ public class Level extends JPanel {
                     Thread.yield();
 
                     // memento
-                    // currently set to save every 1 second
+                    // currently set to save every 5 second
 
-                    if(countdownToFifteen == 1*1000){
+                    if(countdownToFifteen == 1*5000){
                         countdownToFifteen = 0;
                         game.history.add(save());
                     }else {
-                        countdownToFifteen += 10;
+                        countdownToFifteen += 25;
                     }
 
                     try {
-                        Thread.sleep(10);
+                        Thread.sleep(25);
                     }
                     catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
+                calculatePoints();
+                System.out.println(pts);
             }
 
             private void checkCollision() {
@@ -155,7 +162,7 @@ public class Level extends JPanel {
 
                         if(!block.hasEndurance()) {
                             // adding destroyed blocks to destroyedBlocks list
-                            //destroyedBlocks.add(block);
+                            destroyedBlocks.getBlocks().add(block);
                             block.destroy();
 
                             remove(block);
@@ -209,8 +216,14 @@ public class Level extends JPanel {
 
     }
     // Calculate points usign destroyed blocks etc..
+    int pts = 0;
     public void calculatePoints(){
 
+        BlockIterator iterator = new BlockIterator(destroyedBlocks);
+        while(iterator.hasNext()){
+            iterator.getNext();
+            pts++;
+        }
     }
 
 }

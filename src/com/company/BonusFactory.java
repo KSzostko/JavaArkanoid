@@ -16,4 +16,15 @@ public class BonusFactory {
 
         return bonus;
     }
+
+    public static Bonus getBonus(Bonus.Type type, String imgPath,Point point) {
+        Bonus bonus = bonuses.get(type);
+
+        if(bonus == null) {
+            bonus = new Bonus(type, imgPath, point);
+            bonuses.put(type, bonus);
+        }
+
+        return bonus;
+    }
 }

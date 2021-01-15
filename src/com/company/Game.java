@@ -379,9 +379,6 @@ public class Game {
                 // Remove it from list
                 history.remove(history.size()-1);
             }
-
-
-
             // Update level with old data from snap shot
             level.restore(levelSS);
 

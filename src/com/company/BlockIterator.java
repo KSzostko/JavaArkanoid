@@ -2,13 +2,15 @@ package com.company;
 
 public class BlockIterator {
     // block iterator is a mess currently, needs major fixes
+    public BlockIterator(DestroyedBlocks destroyedBlocks){
+        this.destroyedBlocks = destroyedBlocks;
+    }
 
-
-    public DestroyedBlocks destroyedBlocks = new DestroyedBlocks();
+    public DestroyedBlocks destroyedBlocks;
     private int currentElement = 0;
     //
     public boolean hasNext(){
-        if(destroyedBlocks.getBlocks().get(currentElement+1) != null){
+        if(currentElement != destroyedBlocks.getBlocks().size()){
             return true;
         }else{
             return false;

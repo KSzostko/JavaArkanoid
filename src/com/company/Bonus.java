@@ -10,8 +10,22 @@ public class Bonus extends JComponent {
     public static final int WIDTH = 50;
     public static final int HEIGHT = 30;
 
+    public Image getImage() {
+        return image;
+    }
+
+    public Type getType() {
+        return type;
+    }
+    private Point point;
     private Image image;
     private Type type;
+
+    public Bonus(Type type, String imagePath,Point point) {
+        this.type = type;
+        this.image = ImgUtils.getImage(imagePath);
+        this.point = point;
+    }
 
     public Bonus(Type type, String imagePath) {
         this.type = type;
