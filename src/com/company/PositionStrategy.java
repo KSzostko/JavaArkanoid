@@ -34,5 +34,31 @@ public abstract class PositionStrategy {
         }
     }
 
+    protected void chooseBuildType(int next) {
+        switch (blockTypes[next]) {
+            case "S":
+                builder.addStrongBlock(currentX, currentY);
+                break;
+            case "W":
+                builder.addWeakBlock(currentX, currentY);
+                break;
+            case "M":
+                builder.addMediumBlock(currentX, currentY);
+                break;
+            case "BSZN":
+                builder.addNegativeSizeBonus(currentX, currentY);
+                break;
+            case "BSZP":
+                builder.addPositiveSizeBonus(currentX, currentY);
+                break;
+            case "BSN":
+                builder.addNegativeSpeedBonus(currentX, currentY);
+                break;
+            case "BSP":
+                builder.addPositiveSpeedBonus(currentX, currentY);
+                break;
+        }
+    }
+
     public abstract Level arrangeObjects();
 }

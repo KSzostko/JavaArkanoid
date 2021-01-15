@@ -22,72 +22,14 @@ public class RowsPositionStrategy extends PositionStrategy {
             }
 
             currentCount[nextBlock]--;
-            switch (blockTypes[nextBlock]) {
-                case "S":
-                    builder.addStrongBlock(currentX, currentY);
-                    if(currentX + Block.WIDTH + GAP > Game.FRAME_WIDTH) {
-                        currentX = 0;
-                        currentY += Block.HEIGHT;
-                    } else {
-                        currentX += Block.WIDTH + GAP;
-                    }
-                    break;
-                case "W":
-                    builder.addWeakBlock(currentX, currentY);
-                    if(currentX + Block.WIDTH + GAP > Game.FRAME_WIDTH) {
-                        currentX = 0;
-                        currentY += Block.HEIGHT;
-                    } else {
-                        currentX += Block.WIDTH + GAP;
-                    }
-                    break;
-                case "M":
-                    builder.addMediumBlock(currentX, currentY);
-                    if(currentX + Block.WIDTH + GAP > Game.FRAME_WIDTH) {
-                        currentX = 0;
-                        currentY += Block.HEIGHT;
-                    } else {
-                        currentX += Block.WIDTH + GAP;
-                    }
-                    break;
-                case "BSZN":
-                    builder.addNegativeSizeBonus(currentX, currentY);
-                    if(currentX + Block.WIDTH + GAP > Game.FRAME_WIDTH) {
-                        currentX = 0;
-                        currentY += Bonus.WIDTH;
-                    } else {
-                        currentX += Bonus.HEIGHT + GAP;
-                    }
-                    break;
-                case "BSZP":
-                    builder.addPositiveSizeBonus(currentX, currentY);
-                    if(currentX + Block.WIDTH + GAP > Game.FRAME_WIDTH) {
-                        currentX = 0;
-                        currentY += Bonus.HEIGHT;
-                    } else {
-                        currentX += Bonus.WIDTH + GAP;
-                    }
-                    break;
-                case "BSN":
-                    builder.addNegativeSpeedBonus(currentX, currentY);
-                    if(currentX + Block.WIDTH + GAP > Game.FRAME_WIDTH) {
-                        currentX = 0;
-                        currentY += Bonus.HEIGHT;
-                    } else {
-                        currentX += Bonus.WIDTH + GAP;
-                    }
-                    break;
-                case "BSP":
-                    builder.addPositiveSpeedBonus(currentX, currentY);
-                    if(currentX + Block.WIDTH + GAP > Game.FRAME_WIDTH) {
-                        currentX = 0;
-                        currentY += Bonus.HEIGHT;
-                    } else {
-                        currentX += Bonus.WIDTH + GAP;
-                    }
-                    break;
+            if(currentX + Block.WIDTH + GAP > Game.FRAME_WIDTH) {
+                currentX = 0;
+                currentY += Block.HEIGHT;
             }
 
+            chooseBuildType(nextBlock);
+
+            currentX += Block.WIDTH + GAP;
             totalBlocks--;
         }
 
