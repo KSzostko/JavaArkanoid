@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LevelSnapshot {
+    // Getters and setters
 
     public Platform getP() {
         return p;
@@ -55,7 +56,7 @@ public class LevelSnapshot {
         this.bonus = bonus;
     }
 
-    //
+    // Attributes list, important attributes of level class are stored here
     private Platform p;
     private Ball b;
     private int ballR = 20;
@@ -63,6 +64,8 @@ public class LevelSnapshot {
     private List<Block> blo;
     private Map<Point, Bonus> bonus;
     private List<Block> destroyedBlocks;
+    // Constructor of levelsnapshot, it takes data from already existing level and stores in this class for later usage
+    // objects must be inicialized with new keyword because for ex. this.p = platform is only reference passing and it wont do
     public LevelSnapshot(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses,int br,Point bp,List<Block> destroyedBlocks) {
         this.p = new Platform(platform.getX(),platform.getY(),platform.getLevelWidth(),platform.getSensitivity(),"img/wood/container.jpg");
         this.b = new Ball(ball.getSpeed());
@@ -72,9 +75,9 @@ public class LevelSnapshot {
         this.bonus = new_map;
         this.ballP = new Point(bp.getX(),bp.getY());
         this.ballR = br;
-        this.destroyedBlocks = new ArrayList(destroyedBlocks);
+        //this.destroyedBlocks = new ArrayList(destroyedBlocks);
     }
-
+    // return level object inicialized with past level attributes that were stored inside this class
     public Level getState(){
         return new Level(p, b, blo, bonus,ballR,ballP,destroyedBlocks);
     }

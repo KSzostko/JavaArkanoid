@@ -7,6 +7,7 @@ public class Platform extends JComponent {
     public static final int WIDTH = 100;
     public static final int HEIGHT = 20;
 
+    // additional getters needed for levelsnapshot class
     @Override
     public int getX() {
         return x;

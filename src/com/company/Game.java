@@ -158,6 +158,9 @@ public class Game {
     }
 
     public void startLevel() {
+        // reset previous history so user cant undo to level that has already ended
+        resetHistory();
+
         clearScreen();
         frame.setLayout(new BorderLayout());
 
@@ -300,6 +303,7 @@ public class Game {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // prev saved snapshot
+                // trigger undo method upon clicking into prev, it returns a game to state from X seconds
                 undo(false);
             }
         });
@@ -309,6 +313,7 @@ public class Game {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // random saved snapshot
+                // returns game state to random state within history array bounds
                 undo(true);
 
 
@@ -386,6 +391,7 @@ public class Game {
             frame.setVisible(true);
         }
     }
+    // clears whole history this method should trigger when user starts a new game
     public void resetHistory(){
         history.clear();
     }

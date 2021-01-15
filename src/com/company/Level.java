@@ -89,10 +89,13 @@ public class Level extends JPanel {
                     Thread.yield();
 
                     // memento
-                    // currently set to save every 3 seconds
-                    countdownToFifteen += 10;
-                    if(countdownToFifteen == 3*1000){
+                    // currently set to save every 1 second
+
+                    if(countdownToFifteen == 1*1000){
+                        countdownToFifteen = 0;
                         game.history.add(save());
+                    }else {
+                        countdownToFifteen += 10;
                     }
 
                     try {
@@ -152,7 +155,7 @@ public class Level extends JPanel {
 
                         if(!block.hasEndurance()) {
                             // adding destroyed blocks to destroyedBlocks list
-                            destroyedBlocks.add(block);
+                            //destroyedBlocks.add(block);
                             block.destroy();
 
                             remove(block);

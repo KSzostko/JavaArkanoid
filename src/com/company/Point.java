@@ -9,6 +9,7 @@ public class Point {
         this.y = y;
     }
 
+    // some getters and setters to use in levelsnapshot constructor
     public int getX() {
         return x;
     }

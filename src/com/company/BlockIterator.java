@@ -1,6 +1,9 @@
 package com.company;
 
 public class BlockIterator {
+    // block iterator is a mess currently, needs major fixes
+
+
     public DestroyedBlocks destroyedBlocks = new DestroyedBlocks();
     private int currentElement = 0;
     //
