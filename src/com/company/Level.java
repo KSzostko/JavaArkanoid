@@ -94,7 +94,6 @@ public class Level extends JPanel {
                     Rectangle bonusBounds = bonus.getBounds(p);
 
                     if (ballBounds.intersects(bonusBounds.getX(), bonusBounds.getY(), bonusBounds.getWidth(), bonusBounds.getHeight())) {
-                        System.out.println("Collision detected!");
                         ball = bonus.addBonus(ball);
 
                         remove(bonus);
@@ -109,8 +108,7 @@ public class Level extends JPanel {
                 }
 
                 // ball below platform is game over
-                if(platformBounds.getY() - ballBounds.getHeight() < ballBounds.getY() - 3) {
-                    System.out.println("Game over!");
+                if(platformBounds.getY() - ballBounds.getHeight() < ballBounds.getY() - 10) {
                     gameover = true;
                     game.clearScreen();
 
