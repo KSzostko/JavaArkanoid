@@ -42,21 +42,13 @@ public class Ball extends JComponent {
     }
 
     public void collide(JComponent component) {
-        // collision with ball and blocks should look slightly different
+        // this probably can be even better
+        // any idea is welcomed
+        Random random = new Random();
+        double changeDir = random.nextDouble();
 
-        if(component instanceof Block) {
+        if(changeDir < 0.2) {
             speed.setVectorX(speed.getVectorX() * -1);
-        } else {
-            // collision with platform
-
-            // this probably can be even better
-            // any idea is welcomed
-            Random random = new Random();
-            boolean changeDir = random.nextBoolean();
-
-            if(changeDir) {
-                speed.setVectorX(speed.getVectorX() * -1);
-            }
         }
 
         speed.setVectorY(speed.getVectorY() * -1);
