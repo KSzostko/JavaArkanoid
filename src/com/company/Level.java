@@ -17,7 +17,16 @@ public class Level extends JPanel {
     private List<Block> blocks;
     private Map<Point, Bonus> bonuses;
 
+    public Level(Game game, Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses,int br,Point bp) {
+        this.game = game;
+        this.platform = platform;
+        this.ball = ball;
+        this.blocks = blocks;
+        this.bonuses = bonuses;
 
+        initLevel();
+
+    }
     public Level(Game game, Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses) {
         this.game = game;
         this.platform = platform;
@@ -169,4 +178,15 @@ public class Level extends JPanel {
 
         ball.draw(g2d, ballPoint, ballRadius);
     }
+    //
+    public LevelSnapshot save(){
+        return new LevelSnapshot(game,platform,ball,blocks,bonuses,ballRadius,ballPoint);
+    }
+    public void restore(LevelSnapshot levelSnapshot){
+
+    }
+    public void calculatePoints(){
+
+    }
+
 }

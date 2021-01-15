@@ -1,6 +1,6 @@
 package com.company;
 
-public class StoneLevelBuilder extends LevelBuilder {
+public class  StoneLevelBuilder extends LevelBuilder {
     // TODO: Add stone image to every element
     public StoneLevelBuilder(Game game) {
         super(game);
@@ -38,7 +38,7 @@ public class StoneLevelBuilder extends LevelBuilder {
 
     @Override
     public void addPositiveSizeBonus(int x, int y) {
-        Bonus bonus = BonusFactory.getBonus(Bonus.Type.SIZE_INCREASE, "img/wood/container.jpg");
+        Bonus bonus = BonusFactory.getBonus(Bonus.Type.SIZE_INCREASE, "img/wood/hit.jpg");
         bonuses.put(new Point(x, y), bonus);
     }
 

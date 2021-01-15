@@ -8,6 +8,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Game {
