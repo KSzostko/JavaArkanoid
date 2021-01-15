@@ -110,8 +110,7 @@ public class Level extends JPanel {
                         e.printStackTrace();
                     }
                 }
-                calculatePoints();
-                System.out.println(pts);
+
             }
 
             private void checkCollision() {
@@ -144,7 +143,9 @@ public class Level extends JPanel {
                     game.clearScreen();
 
                     // proper score will be calculated with the help of iterator
-                    Score score = new Score("Anon", 12);
+                    calculatePoints();
+                    System.out.println(pts);
+                    Score score = new Score(game.getUsername(), pts);
                     game.displayLevelEndView(score);
                 }
 

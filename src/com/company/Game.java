@@ -21,6 +21,11 @@ public class Game {
     private Ranking ranking;
     private LevelFileReader levelFileReader;
     private PositionStrategy strategy;
+
+    public String getUsername() {
+        return username;
+    }
+
     private String username;
     private Level level;
 
@@ -179,7 +184,8 @@ public class Game {
     }
 
     public void displayLevelEndView(Score score) {
-//        ranking.addScore(score);
+
+        ranking.addScore(score);
 
         clearScreen();
         frame.setLayout(new BorderLayout(20, 60));

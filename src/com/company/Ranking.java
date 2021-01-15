@@ -62,7 +62,7 @@ public class Ranking
         BufferedWriter writer = null;
 
         try {
-            writer = new BufferedWriter(new FileWriter("JavaArkanoid\\ranking\\ranking.txt"));
+            writer = new BufferedWriter(new FileWriter("ranking\\ranking.txt"));
 
             for(Score score : scores) {
                 writer.append(score.getUsername());
