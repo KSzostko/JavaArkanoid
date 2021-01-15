@@ -25,7 +25,7 @@ public class HitState extends State
     public void changeImage()
     {
         // jak już będziemy mieli grafikę to się ustawi odpowiednią
-        String imagePath = "img/wood/hit.jpg";
+        String imagePath = "img/stone/hit.png";
 
         block.setImg(imagePath);
     }

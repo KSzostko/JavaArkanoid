@@ -25,7 +25,7 @@ public class AlmostDestroyedState extends State
     public void changeImage()
     {
         // jak już będziemy mieli grafikę to się ustawi odpowiednią
-        String imagePath = "img/wood/almost_destroyed.jpg";
+        String imagePath = "img/stone/almost_destroyed.png";
 
         block.setImg(imagePath);
     }

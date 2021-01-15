@@ -26,25 +26,25 @@ public class  StoneLevelBuilder extends LevelBuilder {
 
     @Override
     public void addNegativeSpeedBonus(int x, int y) {
-        Bonus bonus = BonusFactory.getBonus(Bonus.Type.SPEED_DECREASE, "img/wood/container.jpg");
+        Bonus bonus = BonusFactory.getBonus(Bonus.Type.SPEED_DECREASE, "img/assets/slow.png");
         bonuses.put(new Point(x, y), bonus);
     }
 
     @Override
     public void addPositiveSpeedBonus(int x, int y) {
-        Bonus bonus = BonusFactory.getBonus(Bonus.Type.SPEED_INCREASE, "img/wood/container.jpg");
+        Bonus bonus = BonusFactory.getBonus(Bonus.Type.SPEED_INCREASE, "img/assets/fast.png");
         bonuses.put(new Point(x, y), bonus);
     }
 
     @Override
     public void addPositiveSizeBonus(int x, int y) {
-        Bonus bonus = BonusFactory.getBonus(Bonus.Type.SIZE_INCREASE, "img/wood/container.jpg");
+        Bonus bonus = BonusFactory.getBonus(Bonus.Type.SIZE_INCREASE, "img/assets/sizeup.png");
         bonuses.put(new Point(x, y), bonus);
     }
 
     @Override
     public void addNegativeSizeBonus(int x, int y) {
-        Bonus bonus = BonusFactory.getBonus(Bonus.Type.SIZE_DECREASE, "img/wood/container.jpg");
+        Bonus bonus = BonusFactory.getBonus(Bonus.Type.SIZE_DECREASE, "img/assets/sizedown.png");
         bonuses.put(new Point(x, y), bonus);
     }
 
@@ -55,6 +55,6 @@ public class  StoneLevelBuilder extends LevelBuilder {
 
     @Override
     public void addPlatform(int x, int y) {
-        platform = new Platform(x, y, Game.FRAME_WIDTH, 10, "img/wood/container.jpg");
+        platform = new Platform(x, y, Game.FRAME_WIDTH, 10, "img/assets/platform.png");
     }
 }
