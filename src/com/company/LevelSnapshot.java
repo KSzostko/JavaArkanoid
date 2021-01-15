@@ -62,8 +62,8 @@ public class LevelSnapshot {
     private Point ballP = new Point(80, 300);
     private List<Block> blo;
     private Map<Point, Bonus> bonus;
-
-    public LevelSnapshot(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses,int br,Point bp) {
+    private List<Block> destroyedBlocks;
+    public LevelSnapshot(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses,int br,Point bp,List<Block> destroyedBlocks) {
         this.p = new Platform(platform.getX(),platform.getY(),platform.getLevelWidth(),platform.getSensitivity(),"img/wood/container.jpg");
         this.b = new Ball(ball.getSpeed());
         this.blo = new ArrayList(blocks);
@@ -72,9 +72,10 @@ public class LevelSnapshot {
         this.bonus = new_map;
         this.ballP = new Point(bp.getX(),bp.getY());
         this.ballR = br;
+        this.destroyedBlocks = new ArrayList(destroyedBlocks);
     }
 
     public Level getState(){
-        return new Level(p, b, blo, bonus,ballR,ballP);
+        return new Level(p, b, blo, bonus,ballR,ballP,destroyedBlocks);
     }
 }

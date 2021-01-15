@@ -16,15 +16,16 @@ public class Level extends JPanel {
     private Point ballPoint = new Point(80, 300);
     private List<Block> blocks;
     private Map<Point, Bonus> bonuses;
-
+    private List<Block> destroyedBlocks;
     // New constructor to aid getState func in levelSnapshot class
-    public Level(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses,int br,Point bp) {
+    public Level(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses,int br,Point bp,List<Block> destroyedBlocks) {
         this.platform = platform;
         this.ball = ball;
         this.blocks = blocks;
         this.bonuses = bonuses;
         this.ballRadius = br;
         this.ballPoint = bp;
+        this.destroyedBlocks = destroyedBlocks;
         initLevel();
 
     }
@@ -150,6 +151,8 @@ public class Level extends JPanel {
                         ball.collide(block);
 
                         if(!block.hasEndurance()) {
+                            // adding destroyed blocks to destroyedBlocks list
+                            destroyedBlocks.add(block);
                             block.destroy();
 
                             remove(block);
@@ -190,7 +193,7 @@ public class Level extends JPanel {
     //
     // Returns current state of level in form of a snapshot
     public LevelSnapshot save(){
-        return new LevelSnapshot(platform,ball,blocks,bonuses,ballRadius,ballPoint);
+        return new LevelSnapshot(platform,ball,blocks,bonuses,ballRadius,ballPoint,destroyedBlocks);
     }
     // Takes snap shot objects and changes current state of level to match snapshot's data
     public void restore(LevelSnapshot levelSnapshot){
