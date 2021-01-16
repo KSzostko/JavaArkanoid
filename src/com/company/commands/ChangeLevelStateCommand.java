@@ -1,5 +1,4 @@
 package com.company.commands;
-
 import com.company.Game;
 
 public class ChangeLevelStateCommand extends Command {
@@ -9,6 +8,6 @@ public class ChangeLevelStateCommand extends Command {
 
     @Override
     public void execute() {
-        System.out.println("Change level state command executed");
+        game.undo(true);
     }
 }

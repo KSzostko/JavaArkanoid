@@ -1,10 +1,7 @@
 package com.company;
 
 
-import com.company.states.AlmostDestroyedState;
-import com.company.states.HealthyState;
-import com.company.states.HitState;
-import com.company.states.State;
+import com.company.states.*;
 //
 import javax.swing.*;
 import java.awt.*;
@@ -32,10 +29,13 @@ public class Block extends JComponent
     public Block(Block b){
         if(b.startEndurance == b.endurance) {
             state = new HealthyState(this);
-        } else if(b.startEndurance > 1) {
+        }else if(b.startEndurance == b.endurance+1){
             state = new HitState(this);
-        } else {
+        }
+        else if(b.startEndurance > 1) {
             state = new AlmostDestroyedState(this);
+        } else {
+            state = new DestroyedState(this);
         }
 
         this.x = b.x;
@@ -43,7 +43,7 @@ public class Block extends JComponent
         this.endurance = b.endurance;
         this.img = b.img;
         this.removed = b.removed;
-        startEndurance = b.endurance;
+        startEndurance = b.startEndurance;
 
         this.levelType = b.getLevelType();
     }

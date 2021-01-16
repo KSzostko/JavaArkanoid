@@ -303,15 +303,8 @@ public class Game {
 
         JMenu menu = new JMenu("Revert");
 
-        JMenuItem prevItem = new JMenuItem("Prev");
-        prevItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // prev saved snapshot
-                // trigger undo method upon clicking into prev, it returns a game to state from X seconds
-                undo(false);
-            }
-        });
+
+
 
         JMenuItem randomItem = new JMenuItem("Random");
         randomItem.addActionListener(new ActionListener() {
@@ -319,13 +312,12 @@ public class Game {
             public void actionPerformed(ActionEvent e) {
                 // random saved snapshot
                 // returns game state to random state within history array bounds
-                undo(true);
-
-
+                Command command = new ChangeLevelStateCommand(Game.this);
+                executeCommand(command);
             }
         });
 
-        menu.add(prevItem);
+
         menu.add(randomItem);
 
         menuBar.add(menu);
