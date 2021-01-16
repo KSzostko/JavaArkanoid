@@ -1,7 +1,6 @@
 package com.company;
 
 public class  StoneLevelBuilder extends LevelBuilder {
-    // TODO: Add stone image to every element
     public StoneLevelBuilder(Game game) {
         super(game);
     }

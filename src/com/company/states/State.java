@@ -18,13 +18,8 @@ public abstract class State
     }
 
     public abstract void playSound();
-
     public abstract void changeImage();
-
-    // te 2 funkcje do sprawdzenia
     public abstract void changeState();
-
-
 
     public class SoundThread implements Runnable
     {
