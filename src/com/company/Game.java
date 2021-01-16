@@ -172,7 +172,7 @@ public class Game {
         // get random level template
         Random random = new Random();
         int randomInt = random.nextInt(3);
-        PositionStrategy strategy = new RowsPositionStrategy(new GrassLevelBuilder(this), levelFileReader.readFile(randomInt+1));
+        PositionStrategy strategy = new RowsPositionStrategy(new StoneLevelBuilder(this), levelFileReader.readFile(randomInt+1));
         level = strategy.arrangeObjects();
 
         frame.getContentPane().add(level, BorderLayout.CENTER);

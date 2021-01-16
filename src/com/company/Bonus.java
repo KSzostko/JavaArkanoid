@@ -21,6 +21,11 @@ public class Bonus extends JComponent {
     private Image image;
     private Type type;
 
+    public Bonus(Bonus bonus) {
+        this.type = bonus.type;
+        this.image =  bonus.getImage();
+    }
+
     public Bonus(Type type, String imagePath,Point point) {
         this.type = type;
         this.image = ImgUtils.getImage(imagePath);

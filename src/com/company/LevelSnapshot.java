@@ -49,7 +49,7 @@ public class LevelSnapshot {
         for (Map.Entry<Point, Bonus> entry : bonuses.entrySet()) {
             Point p = entry.getKey();
             Bonus bonus = entry.getValue();
-            new_map.put(p,bonus);
+            new_map.put(new Point(p.getX(),p.getY()),new Bonus(bonus));
         }
         this.bonuses = new_map;
         this.ballP = new Point(bp.getX(),bp.getY());
