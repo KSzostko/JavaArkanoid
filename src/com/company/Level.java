@@ -70,7 +70,7 @@ public class Level extends JPanel {
         new Thread(new Runnable() {
             private volatile boolean gameover = false;
 
-            private int countdownToFifteen = 0;
+            private int countdownToFifteen = 4000;
 
             @Override
             public void run() {
