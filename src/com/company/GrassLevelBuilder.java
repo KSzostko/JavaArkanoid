@@ -1,26 +1,26 @@
 package com.company;
 
-public class  StoneLevelBuilder extends LevelBuilder {
+public class GrassLevelBuilder extends LevelBuilder {
     // TODO: Add stone image to every element
-    public StoneLevelBuilder(Game game) {
+    public GrassLevelBuilder(Game game) {
         super(game);
     }
 
     @Override
     public void addStrongBlock(int x, int y) {
-        Block block = new Block("img/stone/healthy.png", x, y, 4, "stone");
+        Block block = new Block("img/grass/healthy.png", x, y, 4, "grass");
         blocks.add(block);
     }
 
     @Override
     public void addWeakBlock(int x, int y) {
-        Block block = new Block("img/stone/healthy.png", x, y, 1,"stone");
+        Block block = new Block("img/grass/healthy.png", x, y, 1,"grass");
         blocks.add(block);
     }
 
     @Override
     public void addMediumBlock(int x, int y) {
-        Block block = new Block("img/stone/healthy.png", x, y, 2,"stone");
+        Block block = new Block("img/grass/healthy.png", x, y, 2,"grass");
         blocks.add(block);
     }
 

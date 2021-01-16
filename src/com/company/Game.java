@@ -173,7 +173,7 @@ public class Game {
         frame.add(menuBar, BorderLayout.PAGE_START);
 
         // probably there should be an option to pass parameters to start level and adjust builder and level according to this
-        PositionStrategy strategy = new RowsPositionStrategy(new StoneLevelBuilder(this), levelFileReader.readFile(1));
+        PositionStrategy strategy = new RowsPositionStrategy(new GrassLevelBuilder(this), levelFileReader.readFile(1));
         level = strategy.arrangeObjects();
 
         frame.getContentPane().add(level, BorderLayout.CENTER);

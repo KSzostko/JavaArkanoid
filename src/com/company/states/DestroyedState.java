@@ -21,7 +21,7 @@ public class DestroyedState extends State
     @Override
     public void playSound()
     {
-        new Thread(new SoundThread("sounds/destroyed.wav")).start();
+        new Thread(new SoundThread("JavaArkanoid/sounds/destroyed.wav")).start();
     }
 
     @Override

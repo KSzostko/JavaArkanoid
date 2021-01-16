@@ -24,7 +24,8 @@ public class Block extends JComponent
     private boolean removed = false;
     //
     private Image img;
-
+    //
+    private String levelType = null;
 
     public Block(Block b){
         if(b.startEndurance == b.endurance) {
@@ -41,9 +42,11 @@ public class Block extends JComponent
         this.img = b.img;
         this.removed = b.removed;
         startEndurance = b.endurance;
+
+        this.levelType = b.getLevelType();
     }
 
-    public Block(String imgPath, int x, int y, int endurance)
+    public Block(String imgPath, int x, int y, int endurance, String levelType)
     {
         this.x = x;
         this.y = y;
@@ -53,18 +56,11 @@ public class Block extends JComponent
         this.state = new HealthyState(this);
         //
         this.img = ImgUtils.getImage(imgPath);
+
+        this.levelType = levelType;
     }
 
-    // just for object quick creation while testing
-   /*
-    public Block()
-    {
-        this.x = 50;
-        this.y = 190;
-        this.endurance = 2;
-        this.img = ImgUtils.getImage("img/wood/container.jpg");
-    }
-    */
+    public String getLevelType(){return this.levelType;}
 
     public boolean isRemoved() { return removed; }
 
