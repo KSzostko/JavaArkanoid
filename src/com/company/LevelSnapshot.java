@@ -29,9 +29,12 @@ public class LevelSnapshot {
     private List<Block> blocks;
     private Map<Point, Bonus> bonuses;
     private DestroyedBlocks destroyedBlocks;
-    // Constructor of level snapshot, it takes data from already existing level and stores in this class for later usage
-    // objects must be inicialized with new keyword because for ex. this.p = platform is only reference passing and it wont do
-    public LevelSnapshot(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses,int br,Point bp,DestroyedBlocks destroyedBlocks) {
+    // Constructor of level snapshot, it takes data from already existing level
+    // and stores in this class for later usage
+    // objects must be inicialized with new keyword because
+    // for ex. this.p = platform is only reference passing and it wont do
+    public LevelSnapshot(Platform platform, Ball ball, List<Block> blocks,
+                         Map<Point, Bonus> bonuses,int br,Point bp,DestroyedBlocks destroyedBlocks) {
         this.platform = new Platform(platform);
         this.ball = new Ball(ball.getSpeed());
 
