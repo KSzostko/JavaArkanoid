@@ -169,8 +169,10 @@ public class Game {
         JMenuBar menuBar = addMenuBar();
         frame.add(menuBar, BorderLayout.PAGE_START);
 
-        // probably there should be an option to pass parameters to start level and adjust builder and level according to this
-        PositionStrategy strategy = new RowsPositionStrategy(new GrassLevelBuilder(this), levelFileReader.readFile(1));
+        // get random level template
+        Random random = new Random();
+        int randomInt = random.nextInt(3);
+        PositionStrategy strategy = new RowsPositionStrategy(new GrassLevelBuilder(this), levelFileReader.readFile(randomInt+1));
         level = strategy.arrangeObjects();
 
         frame.getContentPane().add(level, BorderLayout.CENTER);

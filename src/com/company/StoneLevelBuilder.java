@@ -7,7 +7,7 @@ public class  StoneLevelBuilder extends LevelBuilder {
 
     @Override
     public void addStrongBlock(int x, int y) {
-        Block block = new Block("img/stone/healthy.png", x, y, 4, "stone");
+        Block block = new Block("img/stone/healthy.png", x, y, 6, "stone");
         blocks.add(block);
     }
 

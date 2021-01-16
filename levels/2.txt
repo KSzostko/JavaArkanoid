@@ -1,0 +1,7 @@
+S 10
+W 30
+M 5
+BSN 2
+BSP 8
+BSZN 1
+BSZP 1

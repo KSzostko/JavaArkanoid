@@ -8,7 +8,7 @@ public class GrassLevelBuilder extends LevelBuilder {
 
     @Override
     public void addStrongBlock(int x, int y) {
-        Block block = new Block("img/grass/healthy.png", x, y, 4, "grass");
+        Block block = new Block("img/grass/healthy.png", x, y, 3, "grass");
         blocks.add(block);
     }
 
