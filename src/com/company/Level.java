@@ -9,31 +9,20 @@ import java.util.List;
 import java.util.Map;
 
 public class Level extends JPanel {
+    // Getters
+    public List<Block> getBlocks() {
+        return blocks;
+    }
+    //
     private Game game;
     private Platform platform;
     private Ball ball;
     private int ballRadius = 20;
     private Point ballPoint = new Point(80, 300);
-
-    public List<Block> getBlocks() {
-        return blocks;
-    }
-
     private List<Block> blocks;
     private Map<Point, Bonus> bonuses;
     private DestroyedBlocks destroyedBlocks = new DestroyedBlocks();
-    // New constructor to aid getState func in levelSnapshot class
-    public Level(Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses,int br,Point bp,DestroyedBlocks destroyedBlocks) {
-        this.platform = platform;
-        this.ball = ball;
-        this.blocks = blocks;
-        this.bonuses = bonuses;
-        this.ballRadius = br;
-        this.ballPoint = bp;
-        this.destroyedBlocks = destroyedBlocks;
-        initLevel();
 
-    }
     public Level(Game game, Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses) {
         this.game = game;
         this.platform = platform;
@@ -94,17 +83,16 @@ public class Level extends JPanel {
                     Thread.yield();
 
                     // memento
-                    // currently set to save every 5 second
-
-                    if(countdownToFifteen >= 1*5000){
+                    // currently set to save every 4 second
+                    if(countdownToFifteen >= 4000){
                         countdownToFifteen = 0;
                         game.history.add(save());
                     }else {
-                        countdownToFifteen += 25;
+                        countdownToFifteen += 20;
                     }
 
                     try {
-                        Thread.sleep(25);
+                        Thread.sleep(20);
                     }
                     catch (InterruptedException e) {
                         e.printStackTrace();
@@ -212,11 +200,12 @@ public class Level extends JPanel {
         this.ball = levelSnapshot.getB();
         this.ballPoint = levelSnapshot.getBallP();
         this.ballRadius = levelSnapshot.getBallR();
-        this.blocks = levelSnapshot.getBlo();
-        this.bonuses = levelSnapshot.getBonus();
+        this.blocks = levelSnapshot.getBlocks();
+        this.bonuses = levelSnapshot.getBonuses();
+        this.destroyedBlocks = levelSnapshot.getDestroyedBlocks();
 
     }
-    // Calculate points usign destroyed blocks etc..
+    // Calculate points using destroyed blocks etc..
     int pts = 0;
     public void calculatePoints(){
 

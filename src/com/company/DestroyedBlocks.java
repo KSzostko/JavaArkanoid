@@ -8,7 +8,6 @@ public class DestroyedBlocks {
     public List<Block> getBlocks() {
         return blocks;
     }
-
     public void setBlocks(List<Block> blocks) {
         this.blocks = blocks;
     }
@@ -17,5 +16,9 @@ public class DestroyedBlocks {
     // inicialize list upon object creation
     public DestroyedBlocks(){
         blocks = new ArrayList<>();
+    }
+    // aid level snapshot class
+    public DestroyedBlocks(DestroyedBlocks destroyedBlocks){
+        this.blocks = destroyedBlocks.getBlocks();
     }
 }

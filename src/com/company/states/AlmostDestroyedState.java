@@ -24,6 +24,7 @@ public class AlmostDestroyedState extends State
     @Override
     public void changeImage()
     {
+
         String imagePath = null;
 
         if(this.block.getLevelType().equals("stone"))

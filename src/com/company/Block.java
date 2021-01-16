@@ -14,15 +14,12 @@ public class Block extends JComponent
 {
     public static final int WIDTH = 100;
     public static final int HEIGHT = 30;
-
     private State state;
-    //
     private int x;
     private int y;
     private int endurance;
     private final int startEndurance;
     private boolean removed = false;
-    //
     private Image img;
     //
     private String levelType = null;
@@ -52,9 +49,7 @@ public class Block extends JComponent
         this.y = y;
         this.endurance = endurance;
         startEndurance = endurance;
-        //
         this.state = new HealthyState(this);
-        //
         this.img = ImgUtils.getImage(imgPath);
 
         this.levelType = levelType;
@@ -62,6 +57,7 @@ public class Block extends JComponent
 
     public String getLevelType(){return this.levelType;}
 
+    //
     public boolean isRemoved() { return removed; }
 
     public boolean hasEndurance() { return endurance > 0; }
@@ -79,23 +75,16 @@ public class Block extends JComponent
 
     public void hit()
     {
-        // zmiejszenie wytrzymałosci
         endurance--;
-
-        // zmiana stanu na kolejny(block jest coraz bardziej obity)
         state.changeState();
-        // zmiana wyglądu i puszczenie dzwięku z nowego stanu
         playSound();
         changeImage();
-
-        // zniszczenie block-a
         if(endurance == 0)
             destroy();
     }
 
      public void destroy()
      {
-         // here will be more code of course
          removed = true;
      }
 }

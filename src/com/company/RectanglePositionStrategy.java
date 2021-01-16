@@ -12,8 +12,6 @@ public class RectanglePositionStrategy extends PositionStrategy {
     public Level arrangeObjects() {
         Random random = new Random();
         int nextBlock = random.nextInt(blockTypes.length);
-
-        // TODO: Probably there can be few bugs in this loop, needs rechecking for sure
         while(totalBlocks > 0) {
             while(currentCount[nextBlock] == 0) {
                 nextBlock = random.nextInt(blockTypes.length);

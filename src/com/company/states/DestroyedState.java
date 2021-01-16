@@ -27,16 +27,10 @@ public class DestroyedState extends State
     @Override
     public void changeImage()
     {
-        // jak już będziemy mieli grafikę to się ustawi odpowiednią
-        //String imagePath = "img/wood/destroyed.jpg";
-
-        //block.setImg(imagePath);
     }
 
     @Override
     public void changeState() {
-        ;
-        //ostatni stan wiec nia nic sie nie zmienia
     }
 
 }
