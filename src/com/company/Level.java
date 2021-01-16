@@ -23,13 +23,15 @@ public class Level extends JPanel {
     private Map<Point, Bonus> bonuses;
     private DestroyedBlocks destroyedBlocks = new DestroyedBlocks();
 
+    private final int startingBlocksAmount;
+
     public Level(Game game, Platform platform, Ball ball, List<Block> blocks, Map<Point, Bonus> bonuses) {
         this.game = game;
         this.platform = platform;
         this.ball = ball;
         this.blocks = blocks;
         this.bonuses = bonuses;
-
+        startingBlocksAmount = blocks.size();
         initLevel();
 
     }
@@ -126,7 +128,8 @@ public class Level extends JPanel {
                 }
 
                 // ball below platform is game over
-                if(platformBounds.getY() - ballBounds.getHeight() < ballBounds.getY() - 10) {
+                if(platformBounds.getY() - ballBounds.getHeight() < ballBounds.getY() - 10
+                        || (destroyedBlocks.getBlocks().size() == startingBlocksAmount)) {
                     gameover = true;
                     game.clearScreen();
 
