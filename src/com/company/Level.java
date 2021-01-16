@@ -214,8 +214,8 @@ public class Level extends JPanel {
 
         BlockIterator iterator = new BlockIterator(destroyedBlocks);
         while(iterator.hasNext()){
-            iterator.getNext();
-            pts++;
+            Block block = iterator.getNext();
+            pts += block.getStartEndurance();
         }
     }
 

@@ -16,6 +16,8 @@ jt
 2
 jgh
 2
+kug
+2
 h
 1
 h
@@ -38,6 +40,12 @@ y
 1
 fj
 1
+kug
+1
+kug
+1
+kug
+1
 h
 0
 h
@@ -57,4 +65,14 @@ y
 y
 0
 y
+0
+kug
+0
+kug
+0
+kug
+0
+kug
+0
+kug
 0

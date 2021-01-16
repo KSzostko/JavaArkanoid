@@ -23,6 +23,11 @@ public class Block extends JComponent
     private Image img;
     //
     private String levelType = null;
+    // Getters
+    public int getStartEndurance() {
+        return startEndurance;
+    }
+    //
 
     public Block(Block b){
         if(b.startEndurance == b.endurance) {

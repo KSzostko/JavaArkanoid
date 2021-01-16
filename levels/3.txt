@@ -1,7 +1,7 @@
 S 0
-W 1
-M 0
+W 0
+M 1
 BSN 0
 BSP 0
 BSZN 0
-BSZP 2
+BSZP 3
