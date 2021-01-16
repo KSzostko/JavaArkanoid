@@ -24,7 +24,12 @@ public class HitState extends State
     @Override
     public void changeImage()
     {
-        String imagePath = "img/stone/hit.png";
+        String imagePath = null;
+
+        if(this.block.getLevelType().equals("stone"))
+            imagePath = "img/stone/hit.png";
+        else if(this.block.getLevelType().equals("grass"))
+            imagePath = "img/grass/hit.png";
 
         block.setImg(imagePath);
     }

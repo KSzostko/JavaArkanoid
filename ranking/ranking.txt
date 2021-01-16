@@ -7,13 +7,22 @@ Anon2
 sd
 38
 s
+36
+s
 26
+d
+25
 gaga
 15
 s
 11
 s
 7
+<<<<<<< HEAD
+d
+6
+d
+=======
 f
 7
 jkl
@@ -21,6 +30,7 @@ jkl
 sfa
 6
 sd
+>>>>>>> 31f322230ac22285276b00dcc5b65c4a977b2dcd
 6
 sd
 5
@@ -34,15 +44,21 @@ hk
 5
 d
 4
+<<<<<<< HEAD
+d
+=======
 f
 4
 sfa
+>>>>>>> 31f322230ac22285276b00dcc5b65c4a977b2dcd
 4
 s
 3
 gf
 3
 agaggag
+2
+s
 2
 s
 2
@@ -57,6 +73,10 @@ hk
 f
 1
 s
+1
+d
+1
+e
 1
 f
 1
