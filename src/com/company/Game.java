@@ -151,6 +151,46 @@ public class Game {
         frame.setVisible(true);
     }
 
+    public void displayChooseStrategyView() {
+        clearScreen();
+        frame.setLayout(new FlowLayout(FlowLayout.CENTER, 60, 60));
+
+        JLabel label = new JLabel("Choose blocks positions", JLabel.CENTER);
+        label.setFont(new Font("serif", Font.BOLD, 25));
+        label.setPreferredSize(new Dimension(FRAME_WIDTH, 40));
+
+        JButton recButton = new JButton("Rectangle");
+        JButton rowsButton = new JButton("Rows");
+
+        // get random level template
+        Random random = new Random();
+        int randomInt = random.nextInt(3);
+
+        recButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PositionStrategy positionStrategy = new RectanglePositionStrategy(builder, levelFileReader.readFile(randomInt + 1));
+                Command command = new PickStrategyCommand(Game.this, positionStrategy);
+                executeCommand(command);
+            }
+        });
+
+        rowsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PositionStrategy positionStrategy = new RowsPositionStrategy(builder, levelFileReader.readFile(randomInt + 1));
+                Command command = new PickStrategyCommand(Game.this, positionStrategy);
+                executeCommand(command);
+            }
+        });
+
+        frame.add(label);
+        frame.add(recButton);
+        frame.add(rowsButton);
+
+        frame.setVisible(true);
+    }
+
     public void displayAuthorsView() {
         clearScreen();
         frame.setLayout(new FlowLayout());
@@ -209,10 +249,6 @@ public class Game {
         JMenuBar menuBar = addMenuBar();
         frame.add(menuBar, BorderLayout.PAGE_START);
 
-        // get random level template
-        Random random = new Random();
-        int randomInt = random.nextInt(3);
-        PositionStrategy strategy = new RowsPositionStrategy(new StoneLevelBuilder(this), levelFileReader.readFile(randomInt+1));
         level = strategy.arrangeObjects();
 
         frame.getContentPane().add(level, BorderLayout.CENTER);

@@ -14,6 +14,6 @@ public class PickBuilderCommand extends Command {
     @Override
     public void execute() {
         game.setBuilder(builder);
-        // choose strategy screen
+        game.displayChooseStrategyView();
     }
 }
