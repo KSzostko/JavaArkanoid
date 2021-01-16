@@ -1,5 +1,5 @@
 S 0
-W 0
+W 2
 M 1
 BSN 0
 BSP 0

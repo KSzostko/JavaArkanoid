@@ -19,6 +19,10 @@ public class DestroyedBlocks {
     }
     // aid level snapshot class
     public DestroyedBlocks(DestroyedBlocks destroyedBlocks){
-        this.blocks = destroyedBlocks.getBlocks();
+        List<Block> new_blocklist = new ArrayList<>();
+        for(int   i = 0; i<destroyedBlocks.getBlocks().size() ;i++){
+            new_blocklist.add(new Block(destroyedBlocks.getBlocks().get(i)));
+        }
+        this.blocks = new_blocklist;
     }
 }
