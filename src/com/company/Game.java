@@ -362,13 +362,14 @@ public class Game {
 
     public void undo(Boolean useRandom){
         // Check if there is any previous state to return to
+        System.out.println(history.size());
         if(!history.isEmpty()) {
 
-            clearScreen();
-            frame.setLayout(new BorderLayout());
+//            clearScreen();
+//            frame.setLayout(new BorderLayout());
 
-            JMenuBar menuBar = addMenuBar();
-            frame.add(menuBar, BorderLayout.PAGE_START);
+//            JMenuBar menuBar = addMenuBar();
+//            frame.add(menuBar, BorderLayout.PAGE_START);
 
             // depending on useRandom property determien whether to use last save or random one
             LevelSnapshot levelSS;
@@ -378,20 +379,22 @@ public class Game {
                 // Take random level snapshot within bounds
                 levelSS = history.get(randomInt);
                 // Remove it from list
-                history.remove(randomInt);
+//                history.remove(randomInt);
             }else{
                 // Take most recent level snapshot
                 levelSS = history.get(history.size()-1);
                 // Remove it from list
-                history.remove(history.size()-1);
+//                history.remove(history.size()-1);
             }
             // Update level with old data from snap shot
+//            levelSS = history.get(0);
             level.restore(levelSS);
+            level.repaint();
 
-            frame.getContentPane().add(level, BorderLayout.CENTER);
+//            frame.getContentPane().add(level, BorderLayout.CENTER);
 
-            level.requestFocusInWindow();
-            frame.setVisible(true);
+//            level.requestFocusInWindow();
+//            frame.setVisible(true);
         }
     }
     // clears whole history this method should trigger when user starts a new game

@@ -1,7 +1,9 @@
 package com.company;
 
 
+import com.company.states.AlmostDestroyedState;
 import com.company.states.HealthyState;
+import com.company.states.HitState;
 import com.company.states.State;
 //
 import javax.swing.*;
@@ -18,18 +20,27 @@ public class Block extends JComponent
     private int x;
     private int y;
     private int endurance;
+    private final int startEndurance;
     private boolean removed = false;
     //
     private Image img;
 
 
     public Block(Block b){
-        this.state = b.state;
+        if(b.startEndurance == b.endurance) {
+            state = new HealthyState(this);
+        } else if(b.startEndurance > 1) {
+            state = new HitState(this);
+        } else {
+            state = new AlmostDestroyedState(this);
+        }
+
         this.x = b.x;
         this.y = b.y;
         this.endurance = b.endurance;
         this.img = b.img;
         this.removed = b.removed;
+        startEndurance = b.endurance;
     }
 
     public Block(String imgPath, int x, int y, int endurance)
@@ -37,6 +48,7 @@ public class Block extends JComponent
         this.x = x;
         this.y = y;
         this.endurance = endurance;
+        startEndurance = endurance;
         //
         this.state = new HealthyState(this);
         //

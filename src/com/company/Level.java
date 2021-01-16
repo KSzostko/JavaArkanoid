@@ -96,7 +96,7 @@ public class Level extends JPanel {
                     // memento
                     // currently set to save every 5 second
 
-                    if(countdownToFifteen == 1*5000){
+                    if(countdownToFifteen >= 1*5000){
                         countdownToFifteen = 0;
                         game.history.add(save());
                     }else {
