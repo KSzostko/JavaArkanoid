@@ -6,28 +6,21 @@ import java.awt.geom.Ellipse2D;
 import java.util.Random;
 
 public class Ball extends JComponent {
-    // @TODO: add ball image
-    private Image img;
-
     public Speed getSpeed() {
         return speed;
     }
-
     private Speed speed;
     private int levelWidth = Game.FRAME_WIDTH - 20;
 
     public Ball(Speed speed) {
         this.speed = speed;
     }
-
     public Ball() {
         speed = new Speed(-3, -3);
     }
-
     public void draw(Graphics2D g, Point p, int radius) {
         g.drawOval(p.getX(), p.getY(), radius, radius);
         g.fillOval(p.getX(), p.getY(), radius, radius);
-        g.setColor(Color.RED);
     }
 
     public Point move(Point prev) {

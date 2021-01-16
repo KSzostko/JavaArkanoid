@@ -7,12 +7,11 @@ public class Platform extends JComponent {
     public static final int WIDTH = 100;
     public static final int HEIGHT = 20;
 
-    // additional getters needed for levelsnapshot class
+    // additional getters were needed for level snapshot class
     @Override
     public int getX() {
         return x;
     }
-
     @Override
     public int getY() {
         return y;
@@ -20,15 +19,12 @@ public class Platform extends JComponent {
     public int getLevelWidth() {
         return levelWidth;
     }
-
     public Image getImage() {
         return image;
     }
-
     public int getMoving() {
         return moving;
     }
-
     public int getSensitivity() {
         return sensitivity;
     }
@@ -38,11 +34,8 @@ public class Platform extends JComponent {
     private int levelWidth;
     private Image image;
     private int moving = 0;
-
-
-
     private final int sensitivity;
-
+    //
     public Platform(int x, int y, int levelWidth, int sensitivity, String file) {
         this.x = x;
         this.y = y;
@@ -50,8 +43,13 @@ public class Platform extends JComponent {
         this.sensitivity = Math.abs(sensitivity);
         image = ImgUtils.getImage(file);
     }
-
-
+    public Platform(Platform platform){
+        this.x = platform.getX();
+        this.y = platform.getY();
+        this.levelWidth = platform.getLevelWidth();
+        this.sensitivity = platform.getSensitivity();
+        this.image = platform.getImage();
+    }
     public Platform() {
         x = 300 - 100 / 2;
         y = 400;

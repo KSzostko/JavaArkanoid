@@ -16,19 +16,21 @@ import java.util.regex.Pattern;
 public class Game {
     public static final int FRAME_WIDTH = 1000;
     public static final int FRAME_HEIGHT = 500;
-
     private JFrame frame;
     private Ranking ranking;
     private LevelFileReader levelFileReader;
     private PositionStrategy strategy;
-
+    private String username;
+    private Level level;
+    //
+    // Getters & setters
     public String getUsername() {
         return username;
     }
-
-    private String username;
-    private Level level;
-
+    public void setStrategy (PositionStrategy strategy) {
+        this.strategy = strategy;
+    }
+    //
     public Game() {
         // @TODO: add positionStrategy field
         ranking = new Ranking();
@@ -36,11 +38,6 @@ public class Game {
         username = "";
         initScreen();
     }
-
-    public void setStrategy(PositionStrategy strategy) {
-        this.strategy = strategy;
-    }
-
     public JFrame getFrame() {
         return frame;
     }
@@ -357,44 +354,25 @@ public class Game {
         dialog.setLocationRelativeTo(frame);
         dialog.setVisible(true);
     }
-    //
+    // Store previous 'game states' in this array
     public List<LevelSnapshot> history = new ArrayList<>();
 
     public void undo(Boolean useRandom){
         // Check if there is any previous state to return to
         System.out.println(history.size());
         if(!history.isEmpty()) {
-
-//            clearScreen();
-//            frame.setLayout(new BorderLayout());
-
-//            JMenuBar menuBar = addMenuBar();
-//            frame.add(menuBar, BorderLayout.PAGE_START);
-
-            // depending on useRandom property determien whether to use last save or random one
             LevelSnapshot levelSS;
             if(useRandom == true){
                 Random random = new Random();
                 int randomInt = random.nextInt(history.size());
                 // Take random level snapshot within bounds
                 levelSS = history.get(randomInt);
-                // Remove it from list
-//                history.remove(randomInt);
             }else{
                 // Take most recent level snapshot
                 levelSS = history.get(history.size()-1);
-                // Remove it from list
-//                history.remove(history.size()-1);
             }
-            // Update level with old data from snap shot
-//            levelSS = history.get(0);
             level.restore(levelSS);
             level.repaint();
-
-//            frame.getContentPane().add(level, BorderLayout.CENTER);
-
-//            level.requestFocusInWindow();
-//            frame.setVisible(true);
         }
     }
     // clears whole history this method should trigger when user starts a new game
