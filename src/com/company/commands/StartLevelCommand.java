@@ -9,6 +9,7 @@ public class StartLevelCommand extends Command {
 
     @Override
     public void execute() {
-        game.startLevel();
+//        game.startLevel();
+        game.displayChooseBlocksView();
     }
 }

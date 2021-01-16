@@ -20,17 +20,10 @@ public class Game {
     private Ranking ranking;
     private LevelFileReader levelFileReader;
     private PositionStrategy strategy;
+    private LevelBuilder builder;
     private String username;
     private Level level;
-    //
-    // Getters & setters
-    public String getUsername() {
-        return username;
-    }
-    public void setStrategy (PositionStrategy strategy) {
-        this.strategy = strategy;
-    }
-    //
+
     public Game() {
         // @TODO: add positionStrategy field
         ranking = new Ranking();
@@ -38,6 +31,19 @@ public class Game {
         username = "";
         initScreen();
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setStrategy (PositionStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public void setBuilder(LevelBuilder builder) {
+        this.builder = builder;
+    }
+
     public JFrame getFrame() {
         return frame;
     }
@@ -107,6 +113,40 @@ public class Game {
         frame.add(controlPanel, BorderLayout.CENTER);
 
         addNavButtons(controlPanel, true);
+
+        frame.setVisible(true);
+    }
+
+    public void displayChooseBlocksView() {
+        clearScreen();
+        frame.setLayout(new FlowLayout(FlowLayout.CENTER, 60, 60));
+
+        JLabel label = new JLabel("Choose blocks type", JLabel.CENTER);
+        label.setFont(new Font("serif", Font.BOLD, 25));
+        label.setPreferredSize(new Dimension(FRAME_WIDTH, 40));
+
+        JButton stoneButton = new JButton("Stone");
+        JButton grassButton = new JButton("Grass");
+
+        stoneButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Command command = new PickBuilderCommand(Game.this, new StoneLevelBuilder(Game.this));
+                executeCommand(command);
+            }
+        });
+
+        grassButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Command command = new PickBuilderCommand(Game.this, new GrassLevelBuilder(Game.this));
+                executeCommand(command);
+            }
+        });
+
+        frame.add(label);
+        frame.add(stoneButton);
+        frame.add(grassButton);
 
         frame.setVisible(true);
     }
@@ -183,7 +223,6 @@ public class Game {
     }
 
     public void displayLevelEndView(Score score) {
-
         ranking.addScore(score);
 
         clearScreen();
@@ -302,9 +341,6 @@ public class Game {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu menu = new JMenu("Revert");
-
-
-
 
         JMenuItem randomItem = new JMenuItem("Random");
         randomItem.addActionListener(new ActionListener() {
