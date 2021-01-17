@@ -8,6 +8,6 @@ public class ChangeLevelStateCommand extends Command {
 
     @Override
     public void execute() {
-        game.undo(true);
+        game.undo();
     }
 }

@@ -422,19 +422,14 @@ public class Game {
     }
 
 
-    public void undo(Boolean useRandom){
+    public void undo(){
         // Check if there is any previous state to return to
         if(!history.isEmpty()) {
-            LevelSnapshot levelSS;
-            if(useRandom == true){
-                Random random = new Random();
-                int randomInt = random.nextInt(history.size());
-                // Take random level snapshot within bounds
-                levelSS = history.get(randomInt);
-            }else{
-                // Take most recent level snapshot
-                levelSS = history.get(history.size()-1);
-            }
+            Random random = new Random();
+            int randomInt = random.nextInt(history.size());
+
+            LevelSnapshot levelSS = history.get(randomInt);
+
             level.restore(levelSS);
             level.repaint();
         }

@@ -13,7 +13,7 @@ public class DestroyedBlocks {
     public List<Block> getBlocks() {
         return blocks;
     }
-    
+
     public DestroyedBlocks(DestroyedBlocks destroyedBlocks){
         List<Block> new_blocklist = new ArrayList<>();
         for(int   i = 0; i<destroyedBlocks.getBlocks().size() ;i++){
