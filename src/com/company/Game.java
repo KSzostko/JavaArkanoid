@@ -23,9 +23,9 @@ public class Game {
     private LevelBuilder builder;
     private String username;
     private Level level;
+    public List<LevelSnapshot> history = new ArrayList<>();
 
     public Game() {
-        // @TODO: add positionStrategy field
         ranking = new Ranking();
         levelFileReader = LevelFileReader.getInstance();
         username = "";
@@ -420,12 +420,10 @@ public class Game {
         dialog.setLocationRelativeTo(frame);
         dialog.setVisible(true);
     }
-    // Store previous 'game states' in this array
-    public List<LevelSnapshot> history = new ArrayList<>();
+
 
     public void undo(Boolean useRandom){
         // Check if there is any previous state to return to
-        System.out.println(history.size());
         if(!history.isEmpty()) {
             LevelSnapshot levelSS;
             if(useRandom == true){
@@ -441,6 +439,7 @@ public class Game {
             level.repaint();
         }
     }
+
     // clears whole history this method should trigger when user starts a new game
     public void resetHistory(){
         history.clear();

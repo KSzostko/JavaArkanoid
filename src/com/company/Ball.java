@@ -40,8 +40,6 @@ public class Ball extends JComponent {
     }
 
     public void collide(JComponent component) {
-        // this probably can be even better
-        // any idea is welcomed
         Random random = new Random();
         double changeDir = random.nextDouble();
 

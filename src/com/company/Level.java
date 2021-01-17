@@ -9,11 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Level extends JPanel {
-    // Getters
-    public List<Block> getBlocks() {
-        return blocks;
-    }
-    //
     private Game game;
     private Platform platform;
     private Ball ball;
@@ -22,6 +17,7 @@ public class Level extends JPanel {
     private List<Block> blocks;
     private Map<Point, Bonus> bonuses;
     private DestroyedBlocks destroyedBlocks = new DestroyedBlocks();
+    private int pts = 0;
 
     private final int startingBlocksAmount;
 
@@ -85,7 +81,6 @@ public class Level extends JPanel {
                     Thread.yield();
 
                     // memento
-                    // currently set to save every 4 second
                     if(countdownToFifteen >= 4000){
                         countdownToFifteen = 0;
                         game.history.add(save());
@@ -121,8 +116,6 @@ public class Level extends JPanel {
                         revalidate();
                         repaint();
 
-                        // probably only on bonus can be hit at the moment
-                        // so there's no need to check the others
                         break;
                     }
                 }
@@ -133,9 +126,7 @@ public class Level extends JPanel {
                     gameover = true;
                     game.clearScreen();
 
-                    // proper score will be calculated with the help of iterator
                     calculatePoints();
-                    System.out.println(pts);
                     Score score = new Score(game.getUsername(), pts);
                     game.displayLevelEndView(score);
                 }
@@ -145,6 +136,7 @@ public class Level extends JPanel {
                     ball.collide(ball);
                 }
 
+                // ball hit block
                 for(Block block : blocks) {
                     Rectangle blockBounds = block.getBounds();
                     if(ballBounds.intersects(blockBounds.getX(), blockBounds.getY(), blockBounds.getWidth(), blockBounds.getHeight())
@@ -153,7 +145,7 @@ public class Level extends JPanel {
                         ball.collide(block);
 
                         if(!block.hasEndurance()) {
-                            // adding destroyed blocks to destroyedBlocks list
+
                             destroyedBlocks.getBlocks().add(block);
                             block.destroy();
 
@@ -161,7 +153,6 @@ public class Level extends JPanel {
                             revalidate();
                             repaint();
 
-                            // same as with bonuses
                             break;
                         }
                     }
@@ -192,12 +183,13 @@ public class Level extends JPanel {
 
         ball.draw(g2d, ballPoint, ballRadius);
     }
-    //
+
     // Returns current state of level in form of a snapshot
     public LevelSnapshot save(){
         return new LevelSnapshot(platform,ball,blocks,bonuses,ballRadius,ballPoint,destroyedBlocks);
     }
-    // Takes snap shot objects and changes current state of level to match snapshot's data
+
+    // Takessnap shot objects and changes current state of level to match snapshot's data
     public void restore(LevelSnapshot levelSnapshot){
         this.platform = levelSnapshot.getP();
         this.ball = levelSnapshot.getB();
@@ -208,8 +200,8 @@ public class Level extends JPanel {
         this.destroyedBlocks = levelSnapshot.getDestroyedBlocks();
 
     }
+
     // Calculate points using destroyed blocks etc..
-    int pts = 0;
     public void calculatePoints(){
 
         BlockIterator iterator = new BlockIterator(destroyedBlocks);
@@ -218,5 +210,4 @@ public class Level extends JPanel {
             pts += block.getStartEndurance();
         }
     }
-
 }
